@@ -8,7 +8,7 @@ from test import test, test_data_prepare
 from model import Net
 from model_baseline import BaselineNet
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="2"
+os.environ["CUDA_VISIBLE_DEVICES"]="6"
 
 
 def loadModel(word2num, num_classes, hyper):
@@ -81,8 +81,8 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, pathMo
     nnArchitecture = 'fake-net'
     lr = hyper['lr']
     epoch = hyper['epoch']
-    #use_cuda = True
-    use_cuda = False
+    use_cuda = True
+    #use_cuda = False
     num_classes = hyper['num_classes']
 
 
@@ -169,8 +169,8 @@ dataset_name = 'LIAR-PLUS'
 
 mode = 'train'
 #mode = 'test'
-# pathModel = None
-pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'
+pathModel = None
+# pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'
 # pathModel = 'm-fake-net-num_classes-6-test_acc-0.249.pth.tar'
 
 

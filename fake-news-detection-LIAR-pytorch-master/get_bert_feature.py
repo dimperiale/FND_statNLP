@@ -79,7 +79,7 @@ def get_top_wiki_feature(train_filename):
     print(f"get total {count}*3 features")
 
 
-def main():
+def main():
     # related_file=None
     get_top_wiki_feature(train_filename = 'train2.tsv')
     get_top_wiki_feature(train_filename = 'val2.tsv')

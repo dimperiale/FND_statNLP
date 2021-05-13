@@ -6,6 +6,7 @@ import numpy as np
 from nltk import tokenize
 import pickle
 from tqdm import tqdm
+import time
 
 def return_cls(model,tokenizer,text_list):
     # text = "Replace me by any text you'd like."
@@ -79,6 +80,7 @@ def get_top_wiki_feature(train_filename):
         json_id = row['json_ID']
         statement = data_dicts[json_id]['statement']
         speaker = data_dicts[json_id]['speaker']
+        time.sleep(0.3)
         top_sents = get_top_wiki_sentences(speaker,statement, topK=3)
         if top_sents is None:
             ambiguous_spk_statement_count+=1

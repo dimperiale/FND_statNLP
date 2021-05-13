@@ -22,7 +22,10 @@ def return_cls(model,tokenizer,text_list):
 
 def get_top_wiki_sentences(speaker,statement,topK=3):
     spk=speaker # "scott-surovell"
-    spk_wiki_name = wikipedia.search(spk)
+    try:
+        spk_wiki_name = wikipedia.search(spk)
+    except:
+        return None
     if len(spk_wiki_name)==0:
         return None
     else:
@@ -88,8 +91,8 @@ def get_top_wiki_feature(train_filename):
             print(f'statement id {json_id}, dont have wikipage or ambiguous query [{speaker}],skip and use duplicate statement sentences')
         data_dicts[json_id]['top_wiki_sents'] = top_sents
 
-        with open(train_filename+".top_wiki_top_sents",'wb') as f:
-            pickle.dump(data_dicts,f)
+    with open(train_filename+".top_wiki_top_sents",'wb') as f:
+        pickle.dump(data_dicts,f)
 
     print(f"total {ambiguous_spk_statement_count} statements get meaningless wiki top sentences")
 

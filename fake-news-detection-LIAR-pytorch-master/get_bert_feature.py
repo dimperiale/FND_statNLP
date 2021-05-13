@@ -26,12 +26,16 @@ def get_top_wiki_sentences(speaker,statement,topK=3):
     try:
         wiki_page = wikipedia.page(spk_wiki_name,auto_suggest=False)
     except wikipedia.DisambiguationError as e:
-        corpus = []
-        print(f'ambiguous query [{spk_wiki_name}], select the first three pages: {e.options[:3]}')
-        for i in range(3):
-            s = e.options[i] # pick the first
-            wiki_page = wikipedia.page(s)
-            corpus += tokenize.sent_tokenize(wiki_page.content)
+        # corpus = []
+        # print(f'ambiguous query [{spk_wiki_name}], select the first three pages: {e.options[:3]}')
+        # for i in range(3):
+        #     s = e.options[i] # pick the first
+        #     wiki_page = wikipedia.page(s)
+        #     corpus += tokenize.sent_tokenize(wiki_page.content)
+        # random_page = wikipedia.page(e.options)
+        # print(f'ambiguous query [{spk_wiki_name}], select a random unambiguos page: {random_page.title}')
+        # corpus = tokenize.sent_tokenize(random_page.content)
+        return None
     else:
         corpus = tokenize.sent_tokenize(wiki_page.content)
 
@@ -61,6 +65,7 @@ def get_top_wiki_feature(train_filename):
                     "context","justification"]
 
     data_dicts={}
+    ambiguous_spk_statement_count = 0
     for index, row in tqdm(df_table.iterrows()):
         # print(row['json_ID'], row['speaker'])
         data_dicts[row['json_ID']]={
@@ -68,10 +73,19 @@ def get_top_wiki_feature(train_filename):
             'statement':row['statement'],
         }
         json_id = row['json_ID']
-        data_dicts[json_id]['top_wiki_sents'] = get_top_wiki_sentences(data_dicts[json_id]['speaker'],data_dicts[json_id]['statement'],topK=3)
+        statement = data_dicts[json_id]['statement']
+        speaker = data_dicts[json_id]['speaker']
+        top_sents = get_top_wiki_sentences(speaker,statement, topK=3)
+        if top_sents is None:
+            ambiguous_spk_statement_count+=1
+            top_sents = [statement,statement,statement]
+            print(f'statement id {json_id}, ambiguous query [{speaker}],skip and use duplicate statement sentences')
+        data_dicts[json_id]['top_wiki_sents'] = top_sents
 
-    with open(train_filename+".top_wiki_top_sents",'wb') as f:
-        pickle.dump(data_dicts,f)
+        with open(train_filename+".top_wiki_top_sents",'wb') as f:
+            pickle.dump(data_dicts,f)
+            
+    print(f"total {ambiguous_spk_statement_count} statements get meaningless wiki top sentences")
 
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertModel.from_pretrained("bert-base-uncased")
@@ -85,8 +99,8 @@ def get_top_wiki_feature(train_filename):
             print(f"top sent features:\n{data_dicts[json_id]['top_wiki_bert_features']}")
         count+=1
 
-    with open(train_filename+".top_wiki_top_sents",'wb') as f:
-        pickle.dump(data_dicts,f)
+        with open(train_filename+".top_wiki_top_feats",'wb') as f:
+            pickle.dump(data_dicts,f)
 
     print(f"get total {count}*3 features")
 

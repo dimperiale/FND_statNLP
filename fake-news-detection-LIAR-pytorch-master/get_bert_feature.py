@@ -22,9 +22,19 @@ def return_cls(model,tokenizer,text_list):
 def get_top_wiki_sentences(speaker,statement,topK=3):
     spk=speaker # "scott-surovell"
     spk_wiki_name = wikipedia.search(spk)[0]
-    wiki_page = wikipedia.page(spk_wiki_name,auto_suggest=False)
+    # wiki_page = wikipedia.page(spk_wiki_name,auto_suggest=False)
+    try:
+        wiki_page = wikipedia.page(spk_wiki_name,auto_suggest=False)
+    except wikipedia.DisambiguationError as e:
+        corpus = []
+        print(f'ambiguous query [{spk_wiki_name}], select the first three pages: {e.options[:3]}')
+        for i in range(3):
+            s = e.options[i] # pick the first
+            wiki_page = wikipedia.page(s)
+            corpus += tokenize.sent_tokenize(wiki_page.content)
+    else:
+        corpus = tokenize.sent_tokenize(wiki_page.content)
 
-    corpus = tokenize.sent_tokenize(wiki_page.content)
     vectorizer = TfidfVectorizer()
     X = vectorizer.fit_transform(corpus)
     test_X = vectorizer.transform([statement])
@@ -51,21 +61,24 @@ def get_top_wiki_feature(train_filename):
                     "context","justification"]
 
     data_dicts={}
-    for index, row in df_table.iterrows():
+    for index, row in tqdm(df_table.iterrows()):
         # print(row['json_ID'], row['speaker'])
         data_dicts[row['json_ID']]={
             'speaker':row['speaker'],
             'statement':row['statement'],
         }
         json_id = row['json_ID']
-        top_sents = get_top_wiki_sentences(data_dicts[json_id]['speaker'],data_dicts[json_id]['statement'],topK=3)
+        data_dicts[json_id]['top_wiki_sents'] = get_top_wiki_sentences(data_dicts[json_id]['speaker'],data_dicts[json_id]['statement'],topK=3)
+
+    with open(train_filename+".top_wiki_top_sents",'wb') as f:
+        pickle.dump(data_dicts,f)
 
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertModel.from_pretrained("bert-base-uncased")
     count = 0
     for json_id in tqdm(data_dicts):
-        top_sents = get_top_wiki_sentences(data_dicts[json_id]['speaker'],data_dicts[json_id]['statement'],topK=3)
-        data_dicts[json_id]['top_wiki_sents'] = top_sents
+        # top_sents = get_top_wiki_sentences(data_dicts[json_id]['speaker'],data_dicts[json_id]['statement'],topK=3)
+        # data_dicts[json_id]['top_wiki_sents'] = top_sents
         data_dicts[json_id]['top_wiki_bert_features'] = return_cls(model,tokenizer,data_dicts[json_id]['top_wiki_sents'])
         if count==0:
             print(f"top sent:\n{data_dicts[json_id]['top_wiki_sents']}")

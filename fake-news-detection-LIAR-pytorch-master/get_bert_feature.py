@@ -135,10 +135,10 @@ def get_top_wiki_sentence_dict(train_filename):
 def main():
     # related_file=None
     get_top_wiki_sentence_dict(train_filename = 'train2.tsv')
-    get_top_wiki_features(train_filename = 'train2.tsv')
     get_top_wiki_sentence_dict(train_filename = 'val2.tsv')
-    get_top_wiki_features(train_filename = 'val2.tsv')
     get_top_wiki_sentence_dict(train_filename = 'test2.tsv')
+    get_top_wiki_features(train_filename = 'train2.tsv')
+    get_top_wiki_features(train_filename = 'val2.tsv')
     get_top_wiki_features(train_filename = 'test2.tsv')
 
 

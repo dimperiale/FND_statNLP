@@ -38,6 +38,8 @@ def get_top_wiki_features(train_filename):
     for json_id in tqdm(data_dicts):
         # top_sents = get_top_wiki_sentences(data_dicts[json_id]['speaker'],data_dicts[json_id]['statement'],topK=3)
         # data_dicts[json_id]['top_wiki_sents'] = top_sents
+        if 'top_wiki_bert_features' in data_dicts[json_id]:
+            continue
         data_dicts[json_id]['top_wiki_bert_features'] = return_cls(model,tokenizer,data_dicts[json_id]['top_wiki_sents'])
         if count==0:
             print(f"top sent:\n{data_dicts[json_id]['top_wiki_sents']}")

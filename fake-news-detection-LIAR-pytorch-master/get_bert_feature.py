@@ -116,10 +116,10 @@ def get_top_wiki_sentence_dict(train_filename):
     for index, row in tqdm(df_table.iterrows()):
         # print(row['json_ID'], row['speaker'])
         json_id = row['json_ID']
+        statement = row['statement']
+        speaker = row['speaker']
         if json_id in data_dicts:
             continue
-        statement = data_dicts[json_id]['statement']
-        speaker = data_dicts[json_id]['speaker']
         data_dicts[json_id]={
             'speaker':speaker,
             'statement':statement,

@@ -14,13 +14,15 @@ def return_cls(model,tokenizer,text_list):
     cls_list=[]
     
     for text in text_list:
-        token_splits = text.split(' ')
-        if len(token_splits) > 510:
-            text = " ".join(token_splits[:510])
-            text = "[CLS] " + text + " [SEP]"
-        else:
-            text = "[CLS] " + text + " [SEP]"
-        encoded_input = tokenizer(text, return_tensors='pt')
+        # token_splits = text.split(' ')
+        # if len(token_splits) > 510:
+        #     text = " ".join(token_splits[:510])
+        #     text = "[CLS] " + text + " [SEP]"
+        # else:
+        #     text = "[CLS] " + text + " [SEP]"
+        encoded_input = tokenizer(text, return_tensors='pt', 
+            padding=True, truncation=True, 
+            max_length=512, add_special_tokens = True)
         output = model(**encoded_input)
         cls_list.append(output.pooler_output) # (1,768)
     

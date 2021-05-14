@@ -14,7 +14,12 @@ def return_cls(model,tokenizer,text_list):
     cls_list=[]
     
     for text in text_list:
-        text = "[CLS] " + text + " [SEP]"
+        token_splits = text.split(' ')
+        if len(token_splits) > 510:
+            text = " ".join(token_splits[:510])
+            text = "[CLS] " + text + " [SEP]"
+        else:
+            text = "[CLS] " + text + " [SEP]"
         encoded_input = tokenizer(text, return_tensors='pt')
         output = model(**encoded_input)
         cls_list.append(output.pooler_output) # (1,768)

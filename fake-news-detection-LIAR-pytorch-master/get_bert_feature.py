@@ -6,11 +6,8 @@ import numpy as np
 from nltk import tokenize
 import pickle
 from tqdm import tqdm
-<<<<<<< HEAD
 import time
-=======
 import os
->>>>>>> 609b3f267d4dd73333f6961ce6d67bcc70c650ac
 
 def return_cls(model,tokenizer,text_list):
     # text = "Replace me by any text you'd like."
@@ -23,6 +20,29 @@ def return_cls(model,tokenizer,text_list):
         cls_list.append(output.pooler_output) # (1,768)
     
     return cls_list
+
+def get_top_wiki_features(train_filename):
+    assert os.path.isfile(train_filename+".top_wiki_top_sents")
+
+    with open(train_filename+".top_wiki_top_sents",'rb') as f:
+        data_dicts = pickle.load(f)
+
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    model = BertModel.from_pretrained("bert-base-uncased")
+    count = 0
+    for json_id in tqdm(data_dicts):
+        # top_sents = get_top_wiki_sentences(data_dicts[json_id]['speaker'],data_dicts[json_id]['statement'],topK=3)
+        # data_dicts[json_id]['top_wiki_sents'] = top_sents
+        data_dicts[json_id]['top_wiki_bert_features'] = return_cls(model,tokenizer,data_dicts[json_id]['top_wiki_sents'])
+        if count==0:
+            print(f"top sent:\n{data_dicts[json_id]['top_wiki_sents']}")
+            print(f"top sent features:\n{data_dicts[json_id]['top_wiki_bert_features']}")
+        count+=1
+
+        with open(train_filename+".top_wiki_top_feats",'wb') as f:
+            pickle.dump(data_dicts,f)
+    print(f"get total {count}*3 features")
+
 
 def get_top_wiki_sentences(speaker,statement,topK=3):
     spk=speaker # "scott-surovell"
@@ -60,7 +80,7 @@ def get_top_wiki_sentences(speaker,statement,topK=3):
     top_sents = np.array(corpus)[idxs[:topK]].tolist() # sorted scores
     return top_sents
 
-def get_top_wiki_feature(train_filename):
+def get_top_wiki_sentence_dict(train_filename):
     train_file = open(train_filename, 'rb')
     lines = train_file.read()
     lines = lines.decode("utf-8")
@@ -83,6 +103,10 @@ def get_top_wiki_feature(train_filename):
     else:
         data_dicts={}
 
+    if len(data_dicts) == len(df_table.index):
+        print(f"wiki top sentences already finished for {train_filename}, return the function")
+        return None
+
     ambiguous_spk_statement_count = 0
     for index, row in tqdm(df_table.iterrows()):
         # print(row['json_ID'], row['speaker'])
@@ -91,14 +115,10 @@ def get_top_wiki_feature(train_filename):
             continue
         statement = data_dicts[json_id]['statement']
         speaker = data_dicts[json_id]['speaker']
-<<<<<<< HEAD
-        time.sleep(0.3)
-=======
         data_dicts[json_id]={
             'speaker':speaker,
             'statement':statement,
         }
->>>>>>> 609b3f267d4dd73333f6961ce6d67bcc70c650ac
         top_sents = get_top_wiki_sentences(speaker,statement, topK=3)
         if top_sents is None:
             ambiguous_spk_statement_count+=1
@@ -111,29 +131,15 @@ def get_top_wiki_feature(train_filename):
 
     print(f"total {ambiguous_spk_statement_count} statements get meaningless wiki top sentences")
 
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-    model = BertModel.from_pretrained("bert-base-uncased")
-    count = 0
-    for json_id in tqdm(data_dicts):
-        # top_sents = get_top_wiki_sentences(data_dicts[json_id]['speaker'],data_dicts[json_id]['statement'],topK=3)
-        # data_dicts[json_id]['top_wiki_sents'] = top_sents
-        data_dicts[json_id]['top_wiki_bert_features'] = return_cls(model,tokenizer,data_dicts[json_id]['top_wiki_sents'])
-        if count==0:
-            print(f"top sent:\n{data_dicts[json_id]['top_wiki_sents']}")
-            print(f"top sent features:\n{data_dicts[json_id]['top_wiki_bert_features']}")
-        count+=1
-
-        with open(train_filename+".top_wiki_top_feats",'wb') as f:
-            pickle.dump(data_dicts,f)
-
-    print(f"get total {count}*3 features")
-
 
 def main():
     # related_file=None
-    get_top_wiki_feature(train_filename = 'train2.tsv')
-    get_top_wiki_feature(train_filename = 'val2.tsv')
-    get_top_wiki_feature(train_filename = 'test2.tsv')
+    get_top_wiki_sentence_dict(train_filename = 'train2.tsv')
+    get_top_wiki_features(train_filename = 'train2.tsv')
+    get_top_wiki_sentence_dict(train_filename = 'val2.tsv')
+    get_top_wiki_features(train_filename = 'val2.tsv')
+    get_top_wiki_sentence_dict(train_filename = 'test2.tsv')
+    get_top_wiki_features(train_filename = 'test2.tsv')
 
 
 if __name__ == "__main__":

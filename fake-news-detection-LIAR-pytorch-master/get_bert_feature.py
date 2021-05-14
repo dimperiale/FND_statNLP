@@ -6,7 +6,11 @@ import numpy as np
 from nltk import tokenize
 import pickle
 from tqdm import tqdm
+<<<<<<< HEAD
 import time
+=======
+import os
+>>>>>>> 609b3f267d4dd73333f6961ce6d67bcc70c650ac
 
 def return_cls(model,tokenizer,text_list):
     # text = "Replace me by any text you'd like."
@@ -71,19 +75,30 @@ def get_top_wiki_feature(train_filename):
     df_table.columns = ["id","json_ID","label","statement","subjects","speaker","speaker_title","state","party",
                     "barely_true_counts","false_counts","half_true_counts","mostly_true_counts","pants_on_fire_counts",
                     "context","justification"]
+    
+    # continue processing
+    if os.path.isfile(train_filename+".top_wiki_top_sents"):
+        with open(train_filename+".top_wiki_top_sents",'rb') as f:
+            data_dicts = pickle.load(f)
+    else:
+        data_dicts={}
 
-    data_dicts={}
     ambiguous_spk_statement_count = 0
     for index, row in tqdm(df_table.iterrows()):
         # print(row['json_ID'], row['speaker'])
-        data_dicts[row['json_ID']]={
-            'speaker':row['speaker'],
-            'statement':row['statement'],
-        }
         json_id = row['json_ID']
+        if json_id in data_dicts:
+            continue
         statement = data_dicts[json_id]['statement']
         speaker = data_dicts[json_id]['speaker']
+<<<<<<< HEAD
         time.sleep(0.3)
+=======
+        data_dicts[json_id]={
+            'speaker':speaker,
+            'statement':statement,
+        }
+>>>>>>> 609b3f267d4dd73333f6961ce6d67bcc70c650ac
         top_sents = get_top_wiki_sentences(speaker,statement, topK=3)
         if top_sents is None:
             ambiguous_spk_statement_count+=1
@@ -91,8 +106,8 @@ def get_top_wiki_feature(train_filename):
             print(f'statement id {json_id}, dont have wikipage or ambiguous query [{speaker}],skip and use duplicate statement sentences')
         data_dicts[json_id]['top_wiki_sents'] = top_sents
 
-    with open(train_filename+".top_wiki_top_sents",'wb') as f:
-        pickle.dump(data_dicts,f)
+        with open(train_filename+".top_wiki_top_sents",'wb') as f:
+            pickle.dump(data_dicts,f)
 
     print(f"total {ambiguous_spk_statement_count} statements get meaningless wiki top sentences")
 

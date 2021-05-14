@@ -1,3 +1,4 @@
+import torch
 from transformers import BertTokenizer, BertModel
 import pandas as pd
 import wikipedia
@@ -25,7 +26,7 @@ def return_cls(model,tokenizer,text_list):
             max_length=512, add_special_tokens = True)
         output = model(**encoded_input)
         cls_list.append(output.pooler_output) # (1,768)
-    
+    cls_list = torch.cat(cls_list,0)
     return cls_list
 
 def get_top_wiki_features(train_filename):
@@ -38,18 +39,22 @@ def get_top_wiki_features(train_filename):
     model = BertModel.from_pretrained("bert-base-uncased")
     count = 0
     for json_id in tqdm(data_dicts):
-        # top_sents = get_top_wiki_sentences(data_dicts[json_id]['speaker'],data_dicts[json_id]['statement'],topK=3)
-        # data_dicts[json_id]['top_wiki_sents'] = top_sents
         if 'top_wiki_bert_features' in data_dicts[json_id]:
             continue
-        data_dicts[json_id]['top_wiki_bert_features'] = return_cls(model,tokenizer,data_dicts[json_id]['top_wiki_sents'])
+        # data_dicts[json_id]['top_wiki_bert_features'] = return_cls(model,tokenizer,data_dicts[json_id]['top_wiki_sents'])
+        # if count==0:
+        #     print(f"top sent:\n{data_dicts[json_id]['top_wiki_sents']}")
+        #     print(f"top sent features:\n{data_dicts[json_id]['top_wiki_bert_features']}")
+
+        feats = return_cls(model,tokenizer,data_dicts[json_id]['top_wiki_sents'])
         if count==0:
             print(f"top sent:\n{data_dicts[json_id]['top_wiki_sents']}")
-            print(f"top sent features:\n{data_dicts[json_id]['top_wiki_bert_features']}")
+            print(f"top sent features:\n{feats}")
+        torch.save(feats, f"BERT_feats/{train_filename}_{json_id}_top_3_wiki_bert_feats.pt")
         count+=1
 
-        with open(train_filename+".top_wiki_top_feats",'wb') as f:
-            pickle.dump(data_dicts,f)
+    # with open(train_filename+".top_wiki_top_feats",'wb') as f:
+    #     pickle.dump(data_dicts,f)
     print(f"get total {count}*3 features")
 
 

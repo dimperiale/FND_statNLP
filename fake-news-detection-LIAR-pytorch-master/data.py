@@ -3,14 +3,13 @@ import torch
 import pickle
 
 
-liwc_cats = ['Funct', 'Pronoun', 'Ppron', 'I', 'We', 'You', 'SheHe', 'They', 
-             'Ipron', 'Article', 'Verbs', 'AuxVb', 'Past', 'Present', 'Future',
-             'Adverbs', 'Prep', 'Conj', 'Negate', 'Quant', 'Numbers', 'Swear',
-             'Social', 'Family', 'Friends', 'Humans', 'Affect', 'Posemo', 'Negemo',
-             'Anx', 'Anger', 'Sad', 'Insight', 'Cause', 'Discrep', 'Tentat', 'Certain',
-             'Inhib', 'Incl', 'Excl', 'Percept', 'See', 'Hear', 'Feel', 'Bio', 'Body',
-             'Health', 'Sexual', 'Ingest', 'Relativ', 'Motion', 'Space', 'Time', 'Work', 
-             'Achiev', 'Leisure', 'Home', 'Money', 'Relig', 'Death', 'Assent', 'Nonflu', 'Filler']
+liwc_cats = ['Funct', 'Pronoun', 'Ppron', 'I', 'We', 'You', 'SheHe', 'They', 'Ipron', 
+             'Article', 'Verbs', 'AuxVb', 'Past', 'Present', 'Future', 'Adverbs', 'Prep', 
+             'Conj', 'Negate', 'Quant', 'Numbers', 'Swear', 'Social', 'Family', 'Friends', 'Humans', 
+             'Affect', 'Posemo', 'Negemo', 'Anx', 'Anger', 'Sad', 'CogMech', 'Insight', 'Cause', 'Discrep', 
+             'Tentat', 'Certain', 'Inhib', 'Incl', 'Excl', 'Percept', 'See', 'Hear', 'Feel', 'Bio', 'Body', 
+             'Health', 'Sexual', 'Ingest', 'Relativ', 'Motion', 'Space', 'Time', 'Work', 'Achiev', 'Leisure', 
+             'Home', 'Money', 'Relig', 'Death', 'Assent', 'Nonflu', 'Filler']
 
 
 wiki_cats = ["act_adverbs", "comparative_forms", "comparative_forms", "comparative_forms", "manner_adverbs", "superlative_forms"]

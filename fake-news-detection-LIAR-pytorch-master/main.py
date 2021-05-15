@@ -2,12 +2,13 @@
 
 import torch
 import time
-from data import train_data_prepare
+from data import train_data_prepare, train_data_prepare_augmented, test_data_prepare_augmented
 from train import train
 from test import test, test_data_prepare
 from model import Net
 from model_baseline import BaselineNet
 import os
+import pickle
 os.environ["CUDA_VISIBLE_DEVICES"]="6"
 
 
@@ -58,7 +59,7 @@ def loadModel(word2num, num_classes, hyper):
 
     return model
 
-def driver(train_file, valid_file, test_file, output_file, dataset, mode, pathModel, hyper):
+def driver(train_file, valid_file, test_file, output_file, dataset, mode, features, pathModel, hyper):
     '''
     Arguments
     ----------
@@ -81,8 +82,8 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, pathMo
     nnArchitecture = 'fake-net'
     lr = hyper['lr']
     epoch = hyper['epoch']
-    use_cuda = True
-    #use_cuda = False
+    #use_cuda = True
+    use_cuda = False
     num_classes = hyper['num_classes']
 
 
@@ -91,14 +92,33 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, pathMo
     #-----------------TRAINING--------------
     if mode == 'train':
         #---prepare data
-        train_samples, word2num = train_data_prepare(train_file, num_classes, dataset_name)
-        valid_samples = test_data_prepare(valid_file, word2num, 'valid', num_classes, dataset_name)
-        test_samples = test_data_prepare(test_file, word2num, 'test', num_classes, dataset_name)
+        if features == 'augmented':
+            
+            train_wikidict_file = "train_wikictionary_dict.txt"
+            test_wikidict_file = "test_wikictionary_dict.txt"
+            valid_wikidict_file = "valid_wikictionary_dict.txt"
+
+            train_liwc_file = "train_liwc_dict.txt"
+            test_liwc_file = "test_liwc_dict.txt"
+            valid_liwc_file = "valid_liwc_dict.txt"
+            
+            train_samples, word2num = train_data_prepare_augmented(train_file, num_classes, dataset_name,train_wikidict_file, train_liwc_file)
+            valid_samples = test_data_prepare_augmented(valid_file, word2num, 'valid', num_classes, dataset_name,valid_wikidict_file, valid_liwc_file)
+            test_samples = test_data_prepare_augmented(test_file, word2num, 'test', num_classes, dataset_name,test_wikidict_file, test_liwc_file)
+            
+        else:
+            
+            train_samples, word2num = train_data_prepare(train_file, num_classes, dataset_name)
+            valid_samples = test_data_prepare(valid_file, word2num, 'valid', num_classes, dataset_name)
+            test_samples = test_data_prepare(test_file, word2num, 'test', num_classes, dataset_name)
 
         model = loadModel(word2num, num_classes, hyper)
         
         #---train and validate
-        model, val_acc = train(train_samples, valid_samples, lr, epoch, model, num_classes, use_cuda, word2num, hyper, nnArchitecture, timestampLaunch)
+        if features == 'augmented':
+        	model, val_acc = train(train_samples, valid_samples, lr, epoch, model, num_classes, use_cuda, word2num, hyper, nnArchitecture, timestampLaunch)
+        else:
+        	model, val_acc = train(train_samples, valid_samples, lr, epoch, model, num_classes, use_cuda, word2num, hyper, nnArchitecture, timestampLaunch)
 
         #---save model and embeddings
         pathModel = None
@@ -168,9 +188,10 @@ hyper = {
 dataset_name = 'LIAR-PLUS'
 
 mode = 'train'
+features = 'augmented'
 #mode = 'test'
 pathModel = None
-# pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'
+#pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'
 # pathModel = 'm-fake-net-num_classes-6-test_acc-0.249.pth.tar'
 
 
@@ -179,6 +200,6 @@ if mode == 'test':
 
 
 if dataset_name == 'LIAR':
-    driver('train.tsv', 'valid.tsv', 'test.tsv', 'predictions.txt', dataset_name, mode, pathModel, hyper)
+    driver('train.tsv', 'valid.tsv', 'test.tsv', 'predictions.txt', dataset_name, mode, features,pathModel, hyper)
 else:
-    driver('train2.tsv', 'val2.tsv', 'test2.tsv', 'predictions.txt', dataset_name, mode, pathModel, hyper)
+    driver('train2.tsv', 'val2.tsv', 'test2.tsv', 'predictions.txt', dataset_name, mode, features,pathModel, hyper)

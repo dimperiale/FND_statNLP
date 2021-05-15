@@ -19,13 +19,14 @@ def train(train_samples,
           word2num,
           hyper,
           nnArchitecture,
-          timestampLaunch):
+          timestampLaunch,
+          featuretype = "baseline"):
 
 
     train_data = train_samples
-    train_data = dataset_to_variable(train_data, use_cuda)
+    train_data = dataset_to_variable(train_data, use_cuda, featuretype)
     valid_data = valid_samples
-    valid_data = dataset_to_variable(valid_data, use_cuda)
+    valid_data = dataset_to_variable(valid_data, use_cuda, featuretype)
 
     # model cuda
     device = torch.device('cuda') if use_cuda else torch.device('cpu')

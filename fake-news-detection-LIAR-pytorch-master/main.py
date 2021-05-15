@@ -9,7 +9,7 @@ from model import Net
 from model_baseline import BaselineNet
 import os
 import pickle
-os.environ["CUDA_VISIBLE_DEVICES"]="6"
+# os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 
 def loadModel(word2num, num_classes, hyper, feat_list=[]):

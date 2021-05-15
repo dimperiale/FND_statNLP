@@ -12,6 +12,7 @@ liwc_cats = ['Funct', 'Pronoun', 'Ppron', 'I', 'We', 'You', 'SheHe', 'They', 'Ip
              'Home', 'Money', 'Relig', 'Death', 'Assent', 'Nonflu', 'Filler']
 
 
+
 wiki_cats = ["act_adverbs", "comparative_forms", "comparative_forms", "comparative_forms", "manner_adverbs", "superlative_forms"]
 
 
@@ -57,7 +58,9 @@ def dataset_to_variable(dataset, use_cuda, featuretype):
 		dataset[i].justification = torch.LongTensor(dataset[i].justification)
 
 		if featuretype == "augmented":
+			# print("lens:",len(dataset[i].dictionaries_vect)) # length 69?? 70
 			dataset[i].dictionaries_vect = torch.FloatTensor(dataset[i].dictionaries_vect)
+			# exit()
 
 		if use_cuda:
 			dataset[i].statement = dataset[i].statement.cuda()

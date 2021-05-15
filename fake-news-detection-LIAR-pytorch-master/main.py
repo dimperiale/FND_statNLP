@@ -12,7 +12,7 @@ import pickle
 os.environ["CUDA_VISIBLE_DEVICES"]="6"
 
 
-def loadModel(word2num, num_classes, hyper):
+def loadModel(word2num, num_classes, hyper, feat_list=[]):
 
     statement_word2num = word2num[0]
     subject_word2num = word2num[1]
@@ -50,7 +50,9 @@ def loadModel(word2num, num_classes, hyper):
                 justification_lstm_bidirectional = hyper['justification_lstm_bidirectional'],
 
                 dropout_query = hyper['dropout_query'],
-                dropout_features = hyper['dropout_features']
+                dropout_features = hyper['dropout_features'],
+
+                augmented_feat = feat_list,
                 )
 
     print("Hyperparams are:")
@@ -59,7 +61,7 @@ def loadModel(word2num, num_classes, hyper):
 
     return model
 
-def driver(train_file, valid_file, test_file, output_file, dataset, mode, features, pathModel, hyper):
+def driver(train_file, valid_file, test_file, output_file, dataset, mode, features, pathModel, hyper, feat_list=[]):
     '''
     Arguments
     ----------
@@ -112,11 +114,12 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
             valid_samples = test_data_prepare(valid_file, word2num, 'valid', num_classes, dataset_name)
             test_samples = test_data_prepare(test_file, word2num, 'test', num_classes, dataset_name)
 
-        model = loadModel(word2num, num_classes, hyper)
+        model = loadModel(word2num, num_classes, hyper, feat_list=feat_list)
         
         #---train and validate
         if features == 'augmented':
-        	model, val_acc = train(train_samples, valid_samples, lr, epoch, model, num_classes, use_cuda, word2num, hyper, nnArchitecture, timestampLaunch)
+        	model, val_acc = train(train_samples, valid_samples, lr, epoch, model, num_classes, use_cuda, word2num,
+                hyper, nnArchitecture, timestampLaunch, featuretype ='augmented', augment_feat=feat_list)
         else:
         	model, val_acc = train(train_samples, valid_samples, lr, epoch, model, num_classes, use_cuda, word2num, hyper, nnArchitecture, timestampLaunch)
 
@@ -139,7 +142,7 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
             num_classes = 6
         test_samples = test_data_prepare(test_file, word2num, 'test', num_classes, dataset_name)
 
-        model = loadModel(word2num, num_classes, hyper)
+        model = loadModel(word2num, num_classes, hyper,feat_list=feat_list)
         
         device = torch.device('cuda') if use_cuda else torch.device('cpu')
         model.to(device)
@@ -189,6 +192,7 @@ dataset_name = 'LIAR-PLUS'
 
 mode = 'train'
 features = 'augmented'
+feat_list = ['wiki_liwc_dict',]
 #mode = 'test'
 pathModel = None
 #pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'
@@ -200,6 +204,6 @@ if mode == 'test':
 
 
 if dataset_name == 'LIAR':
-    driver('train.tsv', 'valid.tsv', 'test.tsv', 'predictions.txt', dataset_name, mode, features,pathModel, hyper)
+    driver('train.tsv', 'valid.tsv', 'test.tsv', 'predictions.txt', dataset_name, mode, features, pathModel, hyper, feat_list=feat_list)
 else:
-    driver('train2.tsv', 'val2.tsv', 'test2.tsv', 'predictions.txt', dataset_name, mode, features,pathModel, hyper)
+    driver('train2.tsv', 'val2.tsv', 'test2.tsv', 'predictions.txt', dataset_name, mode, features, pathModel, hyper, feat_list=feat_list)

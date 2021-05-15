@@ -33,8 +33,17 @@ class Net(nn.Module):
 				 justification_lstm_nlayers = 2,
 				 justification_lstm_bidirectional = True,
 
+				 wiki_liwc_input_dim = 69, # 5 + 65
+				 wiki_liwc_nn_dim = 10,
+
+				 bert_feat_input_dim = 768*3, # 5 + 65
+				 bert_feat_dense_1_dim = 100,
+				 bert_feat_dense_out_dim = 20,
+
 				 dropout_query = 0.5,
-				 dropout_features = 0.5):
+				 dropout_features = 0.5,
+				 
+				 augmented_feat = [], ):
 
 		# Statement CNN
 		super(Net, self).__init__()
@@ -112,6 +121,7 @@ class Net(nn.Module):
 			bidirectional = justification_lstm_bidirectional
 		)
 
+
 		self.dropout_query = nn.Dropout(dropout_query)
 		self.dropout_features = nn.Dropout(dropout_features)
 		self.query_dim = self.subject_lstm_nlayers * self.subject_lstm_num_direction \
@@ -122,6 +132,12 @@ class Net(nn.Module):
 						+ self.context_lstm_nlayers * self.context_lstm_num_direction \
 						+ self.justification_lstm_nlayers * self.justification_lstm_num_direction
 
+		# additional augment features
+		# WIKI LIWC DICT
+		if 'wiki_liwc_dict' in augmented_feat:
+			self.wiki_liwc_input_dense = nn.Linear(wiki_liwc_input_dim,wiki_liwc_nn_dim)
+			self.query_dim += wiki_liwc_nn_dim;
+
 		self.fc_query = nn.Linear(self.query_dim, self.embed_dim)
 		self.fc_att = nn.Linear(self.embed_dim, self.embed_dim)
 		self.fc_conv = nn.Linear(self.embed_dim, self.embed_dim)
@@ -129,7 +145,7 @@ class Net(nn.Module):
 		self.fc = nn.Linear(len(self.statement_kernel_size) * self.statement_kernel_num + self.query_dim,
 							self.num_classes)
 
-	def forward(self, sample):
+	def forward(self, sample, augmented_feat=[]):
 
 		
 		statement = Variable(sample.statement).unsqueeze(0)
@@ -174,8 +190,17 @@ class Net(nn.Module):
 		_, (justification_, _) = self.justification_lstm(justification_)
 		justification_ = F.max_pool1d(justification_, self.justification_hidden_dim).view(1, -1)
 		
+		
+		if 'wiki_liwc_dict' in augmented_feat:
+			dictionaries_vect = Variable(sample.dictionaries_vect).unsqueeze(0)
+			wiki_liwc_feats_ = self.wiki_liwc_input_dense(dictionaries_vect)
+
 		# Statement
-		query = torch.cat((subject_, speaker_, speaker_pos_, state_, party_, context_, justification_), 1)
+		query_element_tuple = (subject_, speaker_, speaker_pos_, state_, party_, context_, justification_)
+		if 'wiki_liwc_dict' in augmented_feat:
+			query_element_tuple += (wiki_liwc_feats_,)
+
+		query = torch.cat(query_element_tuple, 1)
 		query = F.leaky_relu(self.fc_query(query))
 		query = self.dropout_query(query)
 		query_att = self.fc_att(query).view(1, -1)
@@ -184,6 +209,8 @@ class Net(nn.Module):
 		query_conv = self.fc_conv(query).view(1, -1)
 		for conv in self.statement_convs:
 			conv.weight = nn.Parameter(conv.weight * query_conv)
+
+
 
 		statement_ = self.embedding(statement).unsqueeze(0) # 1*W*D -> 1*1*W*D
 		# Attention
@@ -196,7 +223,10 @@ class Net(nn.Module):
 		statement_ = torch.cat(statement_, 1)  # 1*len(convs)
 
 		# Concatenate
-		features = torch.cat((statement_, subject_, speaker_, speaker_pos_, state_, party_, context_, justification_), 1)
+		feats_element_tuple = (statement_, subject_, speaker_, speaker_pos_, state_, party_, context_, justification_)
+		if 'wiki_liwc_dict' in augmented_feat:
+			feats_element_tuple += (wiki_liwc_feats_,)
+		features = torch.cat(feats_element_tuple, 1)
 		features = self.dropout_features(features)
 		out = self.fc(features)
 		out = F.log_softmax(out, dim=-1)

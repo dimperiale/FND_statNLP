@@ -84,8 +84,8 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
     nnArchitecture = 'fake-net'
     lr = hyper['lr']
     epoch = hyper['epoch']
-    #use_cuda = True
-    use_cuda = False
+    use_cuda = True
+    #use_cuda = False
     num_classes = hyper['num_classes']
 
 
@@ -174,7 +174,7 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
 
 hyper = {
 'num_classes': 6,
-'epoch': 20,
+'epoch': 30,
 'lr': 0.001,
 'embed_dim': 100,
 'statement_kernel_num': 64,
@@ -203,13 +203,15 @@ hyper = {
 dataset_name = 'LIAR-PLUS'
 
 mode = 'train'
-features = 'augmented'
-feat_list = ['wiki_bert_feat',] # ['wiki_liwc_dict',]
+features = "baseline"  #'augmented'
+feat_list = [] # ['wiki_liwc_dict',] # ['wiki_bert_feat',] # ['wiki_liwc_dict',]
 #mode = 'test'
 pathModel = None
 #pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'
 # pathModel = 'm-fake-net-num_classes-6-test_acc-0.249.pth.tar'
 
+print("features:", features)
+print("feat_list:",feat_list)
 
 if mode == 'test':
     assert pathModel != None, "pathModel cannot be None if testing"

@@ -20,7 +20,8 @@ def train(train_samples,
           hyper,
           nnArchitecture,
           timestampLaunch,
-          featuretype = "baseline"):
+          featuretype = "baseline",
+          augment_feat=[]):
 
 
     train_data = train_samples
@@ -72,8 +73,11 @@ def train(train_samples,
 
         print('  [INFO] --- Epoch '+str(epoch_+1)+' complete. Avg. Loss: {:.3f}'.format(total_loss/len(train_data)) + '  Time taken: {:.3f}' .format(time.time()-tick) )
         val_acc = valid(valid_data, model)
-
-        modelName = 'm-' + nnArchitecture + '-num_classes-'+ str(num_classes) + '-' + str(timestampLaunch) + '-epoch-' + str(epoch_) + '-val_acc-{:.3f}'.format(val_acc) + '.pth.tar'
+        if(featuretype=='augmented'):
+            new_feats_name = "new_feats-" + "-".join(augment_feat)
+            modelName = 'm-' + nnArchitecture + '-num_classes-'+ str(num_classes) + '-' + str(timestampLaunch) + '-epoch-' + str(epoch_) + '-val_acc-{:.3f}'.format(val_acc) + new_feats_name + '.pth.tar'
+        else:
+            modelName = 'm-' + nnArchitecture + '-num_classes-'+ str(num_classes) + '-' + str(timestampLaunch) + '-epoch-' + str(epoch_) + '-val_acc-{:.3f}'.format(val_acc) + '.pth.tar'
         torch.save({'state_dict': model.state_dict(), 'word2num': word2num, 'hyper': hyper}, './models/' + modelName)
         print("Saved: ", modelName)
         

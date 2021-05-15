@@ -8,6 +8,8 @@ import random
 import numpy as np
 from model import Net
 from data import dataset_to_variable
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 def train(train_samples,
           valid_samples,
@@ -54,7 +56,7 @@ def train(train_samples,
             optimizer.zero_grad()
 
             # import pdb; pdb.set_trace()
-            prediction = model(sample)
+            prediction = model(sample, augmented_feat=augment_feat)
             label = Variable(torch.LongTensor([sample.label])).to(device)
             # loss = F.cross_entropy(prediction, label)
             # print("prediction:", prediction, " label:", label)

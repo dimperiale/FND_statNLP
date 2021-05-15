@@ -118,7 +118,8 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
         
         #---train and validate
         if features == 'augmented':
-        	model, val_acc = train(train_samples, valid_samples, lr, epoch, model, num_classes, use_cuda, word2num, hyper, nnArchitecture, timestampLaunch)
+        	model, val_acc = train(train_samples, valid_samples, lr, epoch, model, num_classes, use_cuda, word2num,
+                hyper, nnArchitecture, timestampLaunch, featuretype ='augmented', augment_feat=feat_list)
         else:
         	model, val_acc = train(train_samples, valid_samples, lr, epoch, model, num_classes, use_cuda, word2num, hyper, nnArchitecture, timestampLaunch)
 

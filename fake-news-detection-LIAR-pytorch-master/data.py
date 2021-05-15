@@ -2,7 +2,6 @@ import re
 import torch
 import pickle
 
-
 liwc_cats = ['Funct', 'Pronoun', 'Ppron', 'I', 'We', 'You', 'SheHe', 'They', 
              'Ipron', 'Article', 'Verbs', 'AuxVb', 'Past', 'Present', 'Future',
              'Adverbs', 'Prep', 'Conj', 'Negate', 'Quant', 'Numbers', 'Swear',
@@ -58,7 +57,9 @@ def dataset_to_variable(dataset, use_cuda, featuretype):
 		dataset[i].justification = torch.LongTensor(dataset[i].justification)
 
 		if featuretype == "augmented":
+			# print("lens:",len(dataset[i].dictionaries_vect)) # length 69?? 70
 			dataset[i].dictionaries_vect = torch.FloatTensor(dataset[i].dictionaries_vect)
+			# exit()
 
 		if use_cuda:
 			dataset[i].statement = dataset[i].statement.cuda()

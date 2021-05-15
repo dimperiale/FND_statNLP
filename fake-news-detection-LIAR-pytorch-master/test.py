@@ -16,7 +16,7 @@ num_to_label_6_way_classification = [
 
 num_to_label_2_way_classification = ['false', 'true']
 
-def test(test_samples, test_output, model, classification_type, use_cuda = False):
+def test(test_samples, test_output, model, classification_type, use_cuda = False, feat_list=[]):
 
     model.eval()
 
@@ -25,7 +25,7 @@ def test(test_samples, test_output, model, classification_type, use_cuda = False
     acc = 0
     
     for sample in test_samples:
-        prediction = model(sample)
+        prediction = model(sample, augmented_feat=feat_list)
         prediction = int(np.argmax(prediction.cpu().data.numpy()))
         #---choose 6 way or binary classification 
         if classification_type == 2:

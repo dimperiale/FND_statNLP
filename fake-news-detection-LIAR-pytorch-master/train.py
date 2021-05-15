@@ -74,7 +74,7 @@ def train(train_samples,
             #     break
 
         print('  [INFO] --- Epoch '+str(epoch_+1)+' complete. Avg. Loss: {:.3f}'.format(total_loss/len(train_data)) + '  Time taken: {:.3f}' .format(time.time()-tick) )
-        val_acc = valid(valid_data, model)
+        val_acc = valid(valid_data, model, augmented_feat=augment_feat)
         if(featuretype=='augmented'):
             new_feats_name = "new_feats-" + "-".join(augment_feat)
             modelName = 'm-' + nnArchitecture + '-num_classes-'+ str(num_classes) + '-' + str(timestampLaunch) + '-epoch-' + str(epoch_) + '-val_acc-{:.3f}'.format(val_acc) + new_feats_name + '.pth.tar'
@@ -93,13 +93,13 @@ def train(train_samples,
 
 
 
-def valid(valid_samples, model):
+def valid(valid_samples, model, augmented_feat=[]):
 
     model.eval()
     
     acc = 0
     for sample in valid_samples:
-        prediction = model(sample)
+        prediction = model(sample,augmented_feat=augmented_feat)
         # import pdb; pdb.set_trace()
         prediction = int(np.argmax(prediction.cpu().data.numpy()))
         if prediction == sample.label:

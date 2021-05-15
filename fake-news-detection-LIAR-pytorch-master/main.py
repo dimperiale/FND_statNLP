@@ -152,7 +152,8 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
     else:
         print("PATHMODEL could not be loaded:", pathModel)
 
-    test_acc = test(test_samples, output_file, model, num_classes, use_cuda)
+    test_acc = test(test_samples, output_file, model, num_classes, use_cuda, feat_list=feat_list)
+        
 
 
 

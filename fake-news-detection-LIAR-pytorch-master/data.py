@@ -1,7 +1,8 @@
 import re
+from numpy import not_equal
 import torch
 import pickle
-
+import os
 
 liwc_cats = ['Funct', 'Pronoun', 'Ppron', 'I', 'We', 'You', 'SheHe', 'They', 'Ipron', 
              'Article', 'Verbs', 'AuxVb', 'Past', 'Present', 'Future', 'Adverbs', 'Prep', 
@@ -43,7 +44,7 @@ num_to_label_6_way_classification = [
 	'true'
 ]
 
-def dataset_to_variable(dataset, use_cuda, featuretype):
+def dataset_to_variable(dataset, use_cuda, featuretype, augmented_feat=[]):
 
 
 	for i in range(len(dataset)):
@@ -58,9 +59,12 @@ def dataset_to_variable(dataset, use_cuda, featuretype):
 		dataset[i].justification = torch.LongTensor(dataset[i].justification)
 
 		if featuretype == "augmented":
-			# print("lens:",len(dataset[i].dictionaries_vect)) # length 69?? 70
-			dataset[i].dictionaries_vect = torch.FloatTensor(dataset[i].dictionaries_vect)
-			# exit()
+			if 'wiki_liwc_dict' in augmented_feat:
+				dataset[i].dictionaries_vect = torch.FloatTensor(dataset[i].dictionaries_vect) # len  70
+			if 'wiki_bert_feat' in augmented_feat:
+				dataset[i].wiki_top_bert_feat = torch.FloatTensor(dataset[i].wiki_top_bert_feat)
+
+
 
 		if use_cuda:
 			dataset[i].statement = dataset[i].statement.cuda()
@@ -73,7 +77,11 @@ def dataset_to_variable(dataset, use_cuda, featuretype):
 			dataset[i].justification = dataset[i].justification.cuda()
 
 			if featuretype == "augmented":
-				dataset[i].dictionaries_vect = dataset[i].dictionaries_vect.cuda()
+				if 'wiki_liwc_dict' in augmented_feat:
+					dataset[i].dictionaries_vect = dataset[i].dictionaries_vect.cuda()
+				if 'wiki_bert_feat' in augmented_feat:
+					dataset[i].wiki_top_bert_feat = dataset[i].wiki_top_bert_feat.cuda() # or loading when training, if mem not enough
+
 
 	return dataset
 
@@ -138,10 +146,12 @@ class DataSample_augmented:
 		party,
 		context,
 		justification,
-        wikictionary,
-        liwc,
 		num_classes,
-		dataset_name):
+		dataset_name,
+		wikictionary=None,
+		liwc=None,
+		bert_feat=None,
+		):
 
 		#---choose 6 way or binary classification 
 		if num_classes == 2:
@@ -179,19 +189,22 @@ class DataSample_augmented:
 			self.justification = ['<no>']
             
         # wiki dictionary & liwc dictionary
-		wiki_vec = []
-		liwc_vec = []
+		if wikictionary is not None and liwc is not None:
+			wiki_vec = []
+			liwc_vec = []
 
-		for i in range(len(wiki_cats)):
-		    wiki_cat = wiki_cats[i]
-		    wiki_vec.append(wikictionary.get(wiki_cat, 0))
+			for i in range(len(wiki_cats)):
+				wiki_cat = wiki_cats[i]
+				wiki_vec.append(wikictionary.get(wiki_cat, 0))
 
-		for i in range(len(liwc_cats)):
-		    liwc_cat = liwc_cats[i]
-		    liwc_vec.append(liwc.get(liwc_cat, 0))
+			for i in range(len(liwc_cats)):
+				liwc_cat = liwc_cats[i]
+				liwc_vec.append(liwc.get(liwc_cat, 0))
 
 
-		self.dictionaries_vect = wiki_vec + liwc_vec
+			self.dictionaries_vect = wiki_vec + liwc_vec
+		if bert_feat is not None:
+			self.wiki_top_bert_feat = bert_feat.view(-1)
 
             
 
@@ -314,16 +327,23 @@ def train_data_prepare(train_filename, num_classes, dataset_name):
 
 
 
-def train_data_prepare_augmented(train_filename, num_classes, dataset_name, wikidict_filename, liwcdict_filename):
+def train_data_prepare_augmented(train_filename, num_classes, dataset_name, wikidict_filename=None, liwcdict_filename=None, bert_feat_dir=None, row_to_json= None):
 	print("Preparing data from: " + train_filename)
     
     
 	train_file = open(train_filename, 'rb')
-    
-	with open(wikidict_filename, 'rb') as f:
-		wikidict = pickle.load(f)
-	with open(liwcdict_filename, 'rb') as f:
-		liwcdict = pickle.load(f)
+	if wikidict_filename is not None :
+		with open(wikidict_filename, 'rb') as f:
+			wikidict = pickle.load(f)
+	if liwcdict_filename is not None:
+		with open(liwcdict_filename, 'rb') as f:
+			liwcdict = pickle.load(f)
+	if row_to_json is not None:
+		row_idx_to_jsonid = {}
+		with open(row_to_json,'r') as f:
+			for line in f:
+				idx, json_id = line.strip().split('\t')
+				row_idx_to_jsonid[int(idx)] = json_id
 
 	lines = train_file.read()
 	lines = lines.decode("utf-8")
@@ -344,22 +364,29 @@ def train_data_prepare_augmented(train_filename, num_classes, dataset_name, wiki
 		for line in lines.strip().split('\n'):
 			tmp = line.strip().split('\t')
 
+			wiki_dict_feat = None if wikidict_filename is None else wikidict[row_idx][1]
+			liwc_dict_feat = None if liwcdict_filename is None else liwcdict[row_idx][1]
+			bert_feat = None if row_to_json==None else torch.load(os.path.join(bert_feat_dir,f"{train_filename}_{row_idx_to_jsonid[row_idx]}_top_3_wiki_bert_feats.pt"))
+
 			if dataset_name == 'LIAR':
 				#---LIAR
 				while len(tmp) < 14:
 					tmp.append('')
 				p = DataSample_augmented(tmp[1], tmp[2], tmp[3], tmp[4], tmp[5] , tmp[6], tmp[7], tmp[13],'',\
-                                         wikidict[row_idx][1], liwcdict[row_idx][1], num_classes, dataset_name)
+                                         num_classes, dataset_name,
+										 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,bert_feat=bert_feat)
 			else:
 				#---LIAR-PLUS
 				while len(tmp) < 16:
 					tmp.append('')
 				if tmp[2] not in num_to_label_6_way_classification:
 					p = DataSample_augmented(tmp[1], tmp[2], tmp[3], tmp[4], tmp[5] , tmp[6], tmp[7], tmp[13], tmp[14],\
-                                   wikidict[row_idx][1],liwcdict[row_idx][1], num_classes, dataset_name)
+                                	num_classes, dataset_name,
+								   	wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,bert_feat=bert_feat)
 				else:
 					p = DataSample_augmented(tmp[2], tmp[3], tmp[4], tmp[5], tmp[6] , tmp[7], tmp[8], tmp[14], tmp[15],\
-                                   wikidict[row_idx][1],liwcdict[row_idx][1],num_classes, dataset_name)
+                                   num_classes, dataset_name,
+								   wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,bert_feat=bert_feat)
 
 
 			for i in range(len(p.statement)):
@@ -489,16 +516,23 @@ def test_data_prepare(test_file, word2num, phase, num_classes, dataset_name):
 
 
 
-def test_data_prepare_augmented(test_file, word2num, phase, num_classes, dataset_name,wikidict_filename, liwcdict_filename):
+def test_data_prepare_augmented(test_file, word2num, phase, num_classes, dataset_name, wikidict_filename=None, liwcdict_filename=None, bert_feat_dir=None, row_to_json= None):
 	test_input = open(test_file, 'rb')
 	test_data = test_input.read().decode('utf-8')
 	test_input.close()
     
-	with open(wikidict_filename, 'rb') as f:
-		wikidict = pickle.load(f)
-
-	with open(liwcdict_filename, 'rb') as f:
-		liwcdict = pickle.load(f)
+	if wikidict_filename is not None :
+		with open(wikidict_filename, 'rb') as f:
+			wikidict = pickle.load(f)
+	if liwcdict_filename is not None:
+		with open(liwcdict_filename, 'rb') as f:
+			liwcdict = pickle.load(f)
+	if row_to_json is not None:
+		row_idx_to_jsonid = {}
+		with open(row_to_json,'r') as f:
+			for line in f:
+				idx, json_id = line.strip().split('\t')
+				row_idx_to_jsonid[int(idx)] = json_id
 
 	statement_word2num = word2num[0]
 	subject_word2num = word2num[1]
@@ -516,21 +550,28 @@ def test_data_prepare_augmented(test_file, word2num, phase, num_classes, dataset
 	row_idx = 0
 	for line in test_data.strip().split('\n'):
 		tmp = line.strip().split('\t')
-		
+
+		wiki_dict_feat = None if wikidict_filename is None else wikidict[row_idx][1]
+		liwc_dict_feat = None if liwcdict_filename is None else liwcdict[row_idx][1]
+		bert_feat = None if row_to_json==None else torch.load(os.path.join(bert_feat_dir,f"{test_file}_{row_idx_to_jsonid[row_idx]}_top_3_wiki_bert_feats.pt"))
+
 		if dataset_name == 'LIAR':
 			while len(tmp) < 15:
 				tmp.append('')
 			p = DataSample_augmented(tmp[1], tmp[2], tmp[3], tmp[4], tmp[5] , tmp[6], tmp[7], tmp[13], '', \
-                                     wikidict[row_idx][1], liwcdict[row_idx][1],num_classes, dataset_name)
+                                     num_classes, dataset_name,
+									 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,bert_feat=bert_feat)
 		else:
 			while len(tmp) < 16:
 				tmp.append('')
 			if tmp[2] not in num_to_label_6_way_classification:
 				p = DataSample_augmented(tmp[1], tmp[2], tmp[3], tmp[4], tmp[5] , tmp[6], tmp[7], tmp[13], tmp[14], \
-                                         wikidict[row_idx][1], liwcdict[row_idx][1],num_classes, dataset_name)
+                                         num_classes, dataset_name,
+										 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,bert_feat=bert_feat)
 			else:
 				p = DataSample_augmented(tmp[2], tmp[3], tmp[4], tmp[5], tmp[6] , tmp[7], tmp[8], tmp[14], tmp[15], \
-                                         wikidict[row_idx][1], liwcdict[row_idx][1],num_classes, dataset_name)
+                                         num_classes, dataset_name,
+										 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,bert_feat=bert_feat)
 
 
 

@@ -8,6 +8,7 @@ import random
 import numpy as np
 from model import Net
 from data import dataset_to_variable
+import time
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
@@ -27,9 +28,9 @@ def train(train_samples,
 
 
     train_data = train_samples
-    train_data = dataset_to_variable(train_data, use_cuda, featuretype)
+    train_data = dataset_to_variable(train_data, use_cuda, featuretype, augmented_feat = augment_feat)
     valid_data = valid_samples
-    valid_data = dataset_to_variable(valid_data, use_cuda, featuretype)
+    valid_data = dataset_to_variable(valid_data, use_cuda, featuretype, augmented_feat = augment_feat)
 
     # model cuda
     device = torch.device('cuda') if use_cuda else torch.device('cpu')
@@ -76,8 +77,9 @@ def train(train_samples,
         print('  [INFO] --- Epoch '+str(epoch_+1)+' complete. Avg. Loss: {:.3f}'.format(total_loss/len(train_data)) + '  Time taken: {:.3f}' .format(time.time()-tick) )
         val_acc = valid(valid_data, model, augmented_feat=augment_feat)
         if(featuretype=='augmented'):
-            new_feats_name = "new_feats-" + "-".join(augment_feat)
-            modelName = 'm-' + nnArchitecture + '-num_classes-'+ str(num_classes) + '-' + str(timestampLaunch) + '-epoch-' + str(epoch_) + '-val_acc-{:.3f}'.format(val_acc) + new_feats_name + '.pth.tar'
+            new_feats_name = "-new_feats-" + "-".join(augment_feat)
+            time_s = time.strftime("-%Y_%m_%d_%H_%M_%S-", time.localtime()) 
+            modelName = 'm-' + nnArchitecture + "time" + time_s + '-num_classes-'+ str(num_classes) + '-' + str(timestampLaunch) + '-epoch-' + str(epoch_) + '-val_acc-{:.3f}'.format(val_acc) + new_feats_name + '.pth.tar'
         else:
             modelName = 'm-' + nnArchitecture + '-num_classes-'+ str(num_classes) + '-' + str(timestampLaunch) + '-epoch-' + str(epoch_) + '-val_acc-{:.3f}'.format(val_acc) + '.pth.tar'
         torch.save({'state_dict': model.state_dict(), 'word2num': word2num, 'hyper': hyper}, './models/' + modelName)

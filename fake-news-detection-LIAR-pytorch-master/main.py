@@ -90,29 +90,35 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
 
 
     assert num_classes in [2, 6]
+    train_wikidict_file = "train_wikictionary_dict.txt"
+    test_wikidict_file = "test_wikictionary_dict.txt"
+    valid_wikidict_file = "valid_wikictionary_dict.txt"
 
+    train_liwc_file = "train_liwc_dict.txt"
+    test_liwc_file = "test_liwc_dict.txt"
+    valid_liwc_file = "valid_liwc_dict.txt"
+
+    bert_dir = "BERT_feats"
+    train_row_to_json = "train2.tsv_row_idx_tab_json_id.txt"
+    test_row_to_json = "test2.tsv_row_idx_tab_json_id.txt"
+    valid_row_to_json = "val2.tsv_row_idx_tab_json_id.txt"
     #-----------------TRAINING--------------
     if mode == 'train':
         #---prepare data
         if features == 'augmented':
-            
-            train_wikidict_file = "train_wikictionary_dict.txt"
-            test_wikidict_file = "test_wikictionary_dict.txt"
-            valid_wikidict_file = "valid_wikictionary_dict.txt"
-
-            train_liwc_file = "train_liwc_dict.txt"
-            test_liwc_file = "test_liwc_dict.txt"
-            valid_liwc_file = "valid_liwc_dict.txt"
-            
-            train_samples, word2num = train_data_prepare_augmented(train_file, num_classes, dataset_name,train_wikidict_file, train_liwc_file)
-            valid_samples = test_data_prepare_augmented(valid_file, word2num, 'valid', num_classes, dataset_name,valid_wikidict_file, valid_liwc_file)
-            test_samples = test_data_prepare_augmented(test_file, word2num, 'test', num_classes, dataset_name,test_wikidict_file, test_liwc_file)
+                    
+            train_samples, word2num = train_data_prepare_augmented(train_file, num_classes, dataset_name,
+                        wikidict_filename= train_wikidict_file, liwcdict_filename=train_liwc_file, bert_feat_dir=bert_dir, row_to_json= train_row_to_json)
+            valid_samples = test_data_prepare_augmented(valid_file, word2num, 'valid', num_classes, dataset_name,
+                        wikidict_filename= valid_wikidict_file, liwcdict_filename=valid_liwc_file, bert_feat_dir=bert_dir, row_to_json= valid_row_to_json)
+            # test_samples = test_data_prepare_augmented(test_file, word2num, 'test', num_classes, dataset_name,
+            #             wikidict_filename= test_wikidict_file, liwcdict_filename=test_liwc_file, bert_feat_dir=bert_dir, row_to_json= test_row_to_json)
             
         else:
             
             train_samples, word2num = train_data_prepare(train_file, num_classes, dataset_name)
             valid_samples = test_data_prepare(valid_file, word2num, 'valid', num_classes, dataset_name)
-            test_samples = test_data_prepare(test_file, word2num, 'test', num_classes, dataset_name)
+            # test_samples = test_data_prepare(test_file, word2num, 'test', num_classes, dataset_name)
 
         model = loadModel(word2num, num_classes, hyper, feat_list=feat_list)
         
@@ -140,7 +146,12 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
             num_classes = hyper['num_classes']
         except:
             num_classes = 6
-        test_samples = test_data_prepare(test_file, word2num, 'test', num_classes, dataset_name)
+
+        if features == 'augmented':
+            test_samples = test_data_prepare_augmented(test_file, word2num, 'test', num_classes, dataset_name,
+                        wikidict_filename= test_wikidict_file, liwcdict_filename=test_liwc_file, bert_feat_dir=bert_dir, row_to_json= test_row_to_json)
+        else:
+            test_samples = test_data_prepare(test_file, word2num, 'test', num_classes, dataset_name)
 
         model = loadModel(word2num, num_classes, hyper,feat_list=feat_list)
         
@@ -163,7 +174,7 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
 
 hyper = {
 'num_classes': 6,
-'epoch': 10,
+'epoch': 20,
 'lr': 0.001,
 'embed_dim': 100,
 'statement_kernel_num': 64,
@@ -193,7 +204,7 @@ dataset_name = 'LIAR-PLUS'
 
 mode = 'train'
 features = 'augmented'
-feat_list = ['wiki_liwc_dict',]
+feat_list = ['wiki_bert_feat',] # ['wiki_liwc_dict',]
 #mode = 'test'
 pathModel = None
 #pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'

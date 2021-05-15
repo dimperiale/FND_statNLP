@@ -36,8 +36,9 @@ class Net(nn.Module):
 				 wiki_liwc_input_dim = 70, # 5 + 65
 				 wiki_liwc_nn_dim = 10,
 
-				 bert_feat_input_dim = 768*3, # 5 + 65
-				 bert_feat_dense_1_dim = 100,
+				 bert_feat_input_dim = 768*3, 
+				 bert_feat_dense_1_dim = 1024,
+				 bert_feat_dense_2_dim = 100,
 				 bert_feat_dense_out_dim = 20,
 
 				 dropout_query = 0.5,
@@ -137,7 +138,14 @@ class Net(nn.Module):
 		if 'wiki_liwc_dict' in augmented_feat:
 			self.wiki_liwc_input_dense = nn.Linear(wiki_liwc_input_dim,wiki_liwc_nn_dim)
 			self.query_dim += wiki_liwc_nn_dim;
+		# wiki top sentences bert features
+		if 'wiki_bert_feat' in augmented_feat:
+			self.wiki_bert_input_dense = nn.Linear(bert_feat_input_dim, bert_feat_dense_1_dim)
+			self.wiki_bert_dense1_dense = nn.Linear(bert_feat_dense_1_dim,bert_feat_dense_2_dim)
+			self.wiki_bert_output_dense = nn.Linear(bert_feat_dense_2_dim, bert_feat_dense_out_dim)
 
+			self.query_dim += bert_feat_dense_out_dim;
+			
 		self.fc_query = nn.Linear(self.query_dim, self.embed_dim)
 		self.fc_att = nn.Linear(self.embed_dim, self.embed_dim)
 		self.fc_conv = nn.Linear(self.embed_dim, self.embed_dim)
@@ -194,11 +202,25 @@ class Net(nn.Module):
 		if 'wiki_liwc_dict' in augmented_feat:
 			dictionaries_vect = Variable(sample.dictionaries_vect).unsqueeze(0)
 			wiki_liwc_feats_ = self.wiki_liwc_input_dense(dictionaries_vect)
+		if 'wiki_bert_feat' in augmented_feat:
+			if sample.wiki_top_bert_feat.shape[0]==768:
+				sample.wiki_top_bert_feat = torch.cat([sample.wiki_top_bert_feat,sample.wiki_top_bert_feat,sample.wiki_top_bert_feat],0)
+			elif sample.wiki_top_bert_feat.shape[0]==768*2:
+				sample.wiki_top_bert_feat = torch.cat([sample.wiki_top_bert_feat,sample.wiki_top_bert_feat[:768]],0)
+
+			wiki_top_bert_feat = Variable(sample.wiki_top_bert_feat).unsqueeze(0)
+			wiki_top_bert_feat_ = self.wiki_bert_input_dense(wiki_top_bert_feat)
+			wiki_top_bert_feat_ = self.wiki_bert_dense1_dense(wiki_top_bert_feat_)
+			wiki_top_bert_feat_ = self.wiki_bert_output_dense(wiki_top_bert_feat_)
+
+
 
 		# Statement
 		query_element_tuple = (subject_, speaker_, speaker_pos_, state_, party_, context_, justification_)
 		if 'wiki_liwc_dict' in augmented_feat:
 			query_element_tuple += (wiki_liwc_feats_,)
+		if 'wiki_bert_feat' in augmented_feat:
+			query_element_tuple += (wiki_top_bert_feat_,)
 
 		query = torch.cat(query_element_tuple, 1)
 		query = F.leaky_relu(self.fc_query(query))
@@ -226,6 +248,8 @@ class Net(nn.Module):
 		feats_element_tuple = (statement_, subject_, speaker_, speaker_pos_, state_, party_, context_, justification_)
 		if 'wiki_liwc_dict' in augmented_feat:
 			feats_element_tuple += (wiki_liwc_feats_,)
+		if 'wiki_bert_feat' in augmented_feat:
+			feats_element_tuple += (wiki_top_bert_feat_,)
 		features = torch.cat(feats_element_tuple, 1)
 		features = self.dropout_features(features)
 		out = self.fc(features)

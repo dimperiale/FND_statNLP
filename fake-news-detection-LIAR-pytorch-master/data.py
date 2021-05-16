@@ -3,6 +3,7 @@ from numpy import not_equal
 import torch
 import pickle
 import os
+import numpy as np
 
 liwc_cats = ['Funct', 'Pronoun', 'Ppron', 'I', 'We', 'You', 'SheHe', 'They', 'Ipron', 
              'Article', 'Verbs', 'AuxVb', 'Past', 'Present', 'Future', 'Adverbs', 'Prep', 
@@ -15,6 +16,14 @@ liwc_cats = ['Funct', 'Pronoun', 'Ppron', 'I', 'We', 'You', 'SheHe', 'They', 'Ip
 
 
 wiki_cats = ["act_adverbs", "comparative_forms", "manner_adverbs", "modal_adverbs", "superlative_forms"]
+
+
+default_label_dict = {'barely-true': np.nan,
+  'false': np.nan,
+  'half-true':np.nan,
+  'mostly-true': np.nan,
+  'pants-fire': np.nan,
+  'true': np.nan}
 
 
 label_to_number_6_way_classification = {
@@ -215,7 +224,7 @@ class DataSample_augmented:
 
 			for i in range(len(num_to_label_6_way_classification)):
 				credit_cat = num_to_label_6_way_classification[i]
-				credit_vec.append(credit.get(credit_cat, 0))
+				credit_vec.append(credit.get(credit_cat, np.nan))
 
 			self.credithistory_vect = credit_vec
 				
@@ -428,7 +437,7 @@ def train_data_prepare_augmented(train_filename, num_classes, dataset_name, wiki
 			train_samples.append(p)
 	except:
 		print("except")
-		import pdb; pdb.set_trace()
+		#import pdb; pdb.set_trace()
 
 	print("fault:", fault)
 
@@ -583,22 +592,34 @@ def test_data_prepare_augmented(test_file, word2num, phase, num_classes, dataset
 			while len(tmp) < 15:
 				tmp.append('')
 			speaker = tmp[4]
+			if speaker in credit_dict_feat:
+					credit_dict_feat_tmp = credit_dict_feat[speaker]
+			else:
+					credit_dict_feat_tmp = default_label_dict
 			p = DataSample_augmented(tmp[1], tmp[2], tmp[3], tmp[4], tmp[5] , tmp[6], tmp[7], tmp[13], '', \
                                      num_classes, dataset_name,
-									 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,credit = credit_dict_feat[speaker],bert_feat=bert_feat)
+									 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,credit = credit_dict_feat_tmp,bert_feat=bert_feat)
 		else:
 			while len(tmp) < 16:
 				tmp.append('')
 			if tmp[2] not in num_to_label_6_way_classification:
 				speaker = tmp[4]
+				if speaker in credit_dict_feat:
+					credit_dict_feat_tmp = credit_dict_feat[speaker]
+				else:
+					credit_dict_feat_tmp = default_label_dict
 				p = DataSample_augmented(tmp[1], tmp[2], tmp[3], tmp[4], tmp[5] , tmp[6], tmp[7], tmp[13], tmp[14], \
                                          num_classes, dataset_name,
-										 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,credit = credit_dict_feat[speaker],bert_feat=bert_feat)
+										 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,credit = credit_dict_feat_tmp,bert_feat=bert_feat)
 			else:
 				speaker = tmp[5]
+				if speaker in credit_dict_feat:
+					credit_dict_feat_tmp = credit_dict_feat[speaker]
+				else:
+					credit_dict_feat_tmp = default_label_dict
 				p = DataSample_augmented(tmp[2], tmp[3], tmp[4], tmp[5], tmp[6] , tmp[7], tmp[8], tmp[14], tmp[15], \
                                          num_classes, dataset_name,
-										 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,credit = credit_dict_feat[speaker],bert_feat=bert_feat)
+										 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,credit = credit_dict_feat_tmp,bert_feat=bert_feat)
 
 
 

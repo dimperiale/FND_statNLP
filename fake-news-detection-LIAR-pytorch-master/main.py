@@ -9,6 +9,7 @@ from model import Net
 from model_baseline import BaselineNet
 import os
 import pickle
+import argparse
 # os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 
@@ -206,12 +207,12 @@ hyper = {
 dataset_name = 'LIAR-PLUS'
 
 mode = 'train'
-features = 'augmented'
-# features = "baseline"
+# features = 'augmented'
+features = "baseline"
 # feat_list = ['wiki_bert_feat','wiki_liwc_dict'] # ['wiki_liwc_dict',]
-# feat_list = []
+feat_list = []
 #feat_list = ['wiki_bert_feat',]
-feat_list = ['wiki_liwc_dict',]
+# feat_list = ['wiki_liwc_dict',]
 # feat_list = ['credit_history_feat',]
 # feat_list = ['credit_history_feat','wiki_liwc_dict', ]
 # feat_list = ['credit_history_feat','wiki_bert_feat',]
@@ -228,6 +229,23 @@ pathModel = None
 # pathModel = 'm-fake-nettime-2021_05_16_02_42_54--num_classes-6-16052021-015138-epoch-6-val_acc-0.267-new_feats-wiki_bert_feat.pth.tar'
 # pathModel = 'm-fake-nettime-2021_05_16_04_13_43--num_classes-6-16052021-015054-epoch-19-val_acc-0.271-new_feats-wiki_liwc_dict.pth.tar'
 # pathModel = 'm-fake-net-num_classes-6-16052021-014729-epoch-12-val_acc-0.261.pth.tar'
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--mode', default="train", type=str)
+parser.add_argument('--feature_type', default="baseline", type=str)
+parser.add_argument('--pathModel', default=None, type=str)
+parser.add_argument('--feat_list', nargs='+')
+args = parser.parse_args()
+
+mode = args.mode
+features = args.feature_type
+pathModel = args.pathModel
+
+if args.feat_list is not None:
+    feat_list = args.feat_list
+else:
+    feat_list = []
+
 
 print("features:", features)
 print("feat_list:",feat_list)

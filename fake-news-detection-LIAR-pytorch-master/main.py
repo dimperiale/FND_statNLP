@@ -84,8 +84,8 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
     nnArchitecture = 'fake-net'
     lr = hyper['lr']
     epoch = hyper['epoch']
-    # use_cuda = True
-    use_cuda = False
+    use_cuda = True
+    # use_cuda = False
     num_classes = hyper['num_classes']
 
 
@@ -99,7 +99,7 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
     valid_liwc_file = "valid_liwc_dict.txt"
 
     train_credit_file = "label_rel_counts"
-    test_credit_file = "test_label_rel_counts"
+    test_credit_file = "test_label_rel_counts" # valid and test can share
 
     bert_dir = "BERT_feats"
     train_row_to_json = "train2.tsv_row_idx_tab_json_id.txt"

@@ -206,12 +206,28 @@ hyper = {
 dataset_name = 'LIAR-PLUS'
 
 mode = 'train'
-features = 'augmented'  # "baseline" 
-feat_list = ["credit_history_feat",] # ['wiki_liwc_dict',] # ['wiki_bert_feat',] # ['wiki_liwc_dict',] # ["credit_history_feat",]
-#mode = 'test'
+features = 'augmented'
+# features = "baseline"
+# feat_list = ['wiki_bert_feat','wiki_liwc_dict'] # ['wiki_liwc_dict',]
+# feat_list = []
+#feat_list = ['wiki_bert_feat',]
+#feat_list = ['wiki_liwc_dict',]
+feat_list = ['credit_history_feat',]
+# feat_list = ['credit_history_feat','wiki_liwc_dict', ]
+# feat_list = ['credit_history_feat','wiki_bert_feat',]
+# feat_list = ['credit_history_feat','wiki_liwc_dict', 'wiki_bert_feat' ]
+
+# mode = 'test'
 pathModel = None
-#pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'
-# pathModel = 'm-fake-net-num_classes-6-test_acc-0.249.pth.tar'
+# v0 epoch 10:
+#pathModel = 'm-fake-net-num_classes-6-16052021-000950-epoch-8-val_acc-0.269new_feats-wiki_liwc_dict.pth.tar'
+#pathModel = 'm-fake-net-num_classes-6-12052021-165803-epoch-4-val_acc-0.252.pth.tar'
+
+# v1 epoch 30:
+# pathModel = 'm-fake-nettime-2021_05_16_03_12_54--num_classes-6-16052021-021059-epoch-7-val_acc-0.281-new_feats-wiki_bert_feat-wiki_liwc_dict.pth.tar'
+# pathModel = 'm-fake-nettime-2021_05_16_02_42_54--num_classes-6-16052021-015138-epoch-6-val_acc-0.267-new_feats-wiki_bert_feat.pth.tar'
+# pathModel = 'm-fake-nettime-2021_05_16_04_13_43--num_classes-6-16052021-015054-epoch-19-val_acc-0.271-new_feats-wiki_liwc_dict.pth.tar'
+# pathModel = 'm-fake-net-num_classes-6-16052021-014729-epoch-12-val_acc-0.261.pth.tar'
 
 print("features:", features)
 print("feat_list:",feat_list)

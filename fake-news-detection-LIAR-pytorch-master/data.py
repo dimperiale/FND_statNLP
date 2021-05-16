@@ -354,8 +354,8 @@ def train_data_prepare_augmented(train_filename, num_classes, dataset_name, wiki
 	if liwcdict_filename is not None:
 		with open(liwcdict_filename, 'rb') as f:
 			liwcdict = pickle.load(f)
-    if credit_filename is not None:
-		with open(credit_filename, 'rb') as f:
+    if creditdict_filename is not None:
+		with open(creditdict_filename, 'rb') as f:
 			creditdict = pickle.load(f)
 	if row_to_json is not None:
 		row_idx_to_jsonid = {}
@@ -385,7 +385,7 @@ def train_data_prepare_augmented(train_filename, num_classes, dataset_name, wiki
 
 			wiki_dict_feat = None if wikidict_filename is None else wikidict[row_idx][1]
 			liwc_dict_feat = None if liwcdict_filename is None else liwcdict[row_idx][1]
-			credit_dict_feat = None if credit_filename is None else creditdict[row_idx][1]
+			credit_dict_feat = None if creditdict_filename is None else creditdict[row_idx][1]
 			bert_feat = None if row_to_json==None else torch.load(os.path.join(bert_feat_dir,f"{train_filename}_{row_idx_to_jsonid[row_idx]}_top_3_wiki_bert_feats.pt"))
 
 			if dataset_name == 'LIAR':

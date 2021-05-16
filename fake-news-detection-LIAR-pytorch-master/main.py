@@ -98,6 +98,9 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
     test_liwc_file = "test_liwc_dict.txt"
     valid_liwc_file = "valid_liwc_dict.txt"
 
+    train_credit_file = "label_rel_counts"
+    test_credit_file = "test_label_rel_counts"
+
     bert_dir = "BERT_feats"
     train_row_to_json = "train2.tsv_row_idx_tab_json_id.txt"
     test_row_to_json = "test2.tsv_row_idx_tab_json_id.txt"
@@ -108,11 +111,11 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
         if features == 'augmented':
                     
             train_samples, word2num = train_data_prepare_augmented(train_file, num_classes, dataset_name,
-                        wikidict_filename= train_wikidict_file, liwcdict_filename=train_liwc_file, bert_feat_dir=bert_dir, row_to_json= train_row_to_json)
+                        wikidict_filename= train_wikidict_file, liwcdict_filename=train_liwc_file, creditdict_filename = train_credit_file, bert_feat_dir=bert_dir, train_row_to_json= train_row_to_json)
             valid_samples = test_data_prepare_augmented(valid_file, word2num, 'valid', num_classes, dataset_name,
-                        wikidict_filename= valid_wikidict_file, liwcdict_filename=valid_liwc_file, bert_feat_dir=bert_dir, row_to_json= valid_row_to_json)
+                        wikidict_filename= valid_wikidict_file, liwcdict_filename=valid_liwc_file, creditdict_filename = test_credit_file, bert_feat_dir=bert_dir, row_to_json= valid_row_to_json)
             # test_samples = test_data_prepare_augmented(test_file, word2num, 'test', num_classes, dataset_name,
-            #             wikidict_filename= test_wikidict_file, liwcdict_filename=test_liwc_file, bert_feat_dir=bert_dir, row_to_json= test_row_to_json)
+            #             wikidict_filename= test_wikidict_file, liwcdict_filename=test_liwc_file, creditdict_filename = test_credit_file, bert_feat_dir=bert_dir, row_to_json= test_row_to_json)
             
         else:
             
@@ -149,7 +152,7 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
 
         if features == 'augmented':
             test_samples = test_data_prepare_augmented(test_file, word2num, 'test', num_classes, dataset_name,
-                        wikidict_filename= test_wikidict_file, liwcdict_filename=test_liwc_file, bert_feat_dir=bert_dir, row_to_json= test_row_to_json)
+                        wikidict_filename= test_wikidict_file, liwcdict_filename=test_liwc_file, creditdict_filename = test_credit_file, bert_feat_dir=bert_dir, row_to_json= test_row_to_json)
         else:
             test_samples = test_data_prepare(test_file, word2num, 'test', num_classes, dataset_name)
 
@@ -204,7 +207,7 @@ dataset_name = 'LIAR-PLUS'
 
 mode = 'train'
 features = "baseline"  #'augmented'
-feat_list = [] # ['wiki_liwc_dict',] # ['wiki_bert_feat',] # ['wiki_liwc_dict',]
+feat_list = [] # ['wiki_liwc_dict',] # ['wiki_bert_feat',] # ['wiki_liwc_dict',] # ["credit_history_feat",]
 #mode = 'test'
 pathModel = None
 #pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'

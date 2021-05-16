@@ -18,12 +18,12 @@ liwc_cats = ['Funct', 'Pronoun', 'Ppron', 'I', 'We', 'You', 'SheHe', 'They', 'Ip
 wiki_cats = ["act_adverbs", "comparative_forms", "manner_adverbs", "modal_adverbs", "superlative_forms"]
 
 
-default_label_dict = {'barely-true': np.nan,
-  'false': np.nan,
-  'half-true':np.nan,
-  'mostly-true': np.nan,
-  'pants-fire': np.nan,
-  'true': np.nan}
+default_label_dict = {'barely-true': 1/6,
+  'false': 1/6,
+  'half-true':1/6,
+  'mostly-true': 1/6,
+  'pants-fire': 1/6,
+  'true': 1/6,}
 
 
 label_to_number_6_way_classification = {

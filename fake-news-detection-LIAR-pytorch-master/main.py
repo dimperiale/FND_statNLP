@@ -84,8 +84,8 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
     nnArchitecture = 'fake-net'
     lr = hyper['lr']
     epoch = hyper['epoch']
-    use_cuda = True
-    #use_cuda = False
+    # use_cuda = True
+    use_cuda = False
     num_classes = hyper['num_classes']
 
 
@@ -111,7 +111,7 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
         if features == 'augmented':
                     
             train_samples, word2num = train_data_prepare_augmented(train_file, num_classes, dataset_name,
-                        wikidict_filename= train_wikidict_file, liwcdict_filename=train_liwc_file, creditdict_filename = train_credit_file, bert_feat_dir=bert_dir, train_row_to_json= train_row_to_json)
+                        wikidict_filename= train_wikidict_file, liwcdict_filename=train_liwc_file, creditdict_filename = train_credit_file, bert_feat_dir=bert_dir, row_to_json= train_row_to_json)
             valid_samples = test_data_prepare_augmented(valid_file, word2num, 'valid', num_classes, dataset_name,
                         wikidict_filename= valid_wikidict_file, liwcdict_filename=valid_liwc_file, creditdict_filename = test_credit_file, bert_feat_dir=bert_dir, row_to_json= valid_row_to_json)
             # test_samples = test_data_prepare_augmented(test_file, word2num, 'test', num_classes, dataset_name,
@@ -206,8 +206,8 @@ hyper = {
 dataset_name = 'LIAR-PLUS'
 
 mode = 'train'
-features = "baseline"  #'augmented'
-feat_list = [] # ['wiki_liwc_dict',] # ['wiki_bert_feat',] # ['wiki_liwc_dict',] # ["credit_history_feat",]
+features = 'augmented'  # "baseline" 
+feat_list = ["credit_history_feat",] # ['wiki_liwc_dict',] # ['wiki_bert_feat',] # ['wiki_liwc_dict',] # ["credit_history_feat",]
 #mode = 'test'
 pathModel = None
 #pathModel = 'm-fake-net-num_classes-2-test_acc-0.633.pth.tar'

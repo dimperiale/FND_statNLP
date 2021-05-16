@@ -41,6 +41,10 @@ class Net(nn.Module):
 				 bert_feat_dense_2_dim = 100,
 				 bert_feat_dense_out_dim = 20,
 
+
+				 credit_history_hidden_dim = 6,
+				 credit_history_dense_dim = 10,
+
 				 dropout_query = 0.5,
 				 dropout_features = 0.5,
 				 
@@ -146,6 +150,12 @@ class Net(nn.Module):
 
 			self.query_dim += bert_feat_dense_out_dim;
 			
+		if "credit_history_feat" in augmented_feat:
+			self.credit_history_dense_nlayers = nn.Linear(credit_history_hidden_dim, credit_history_dense_dim)
+
+			self.query_dim += credit_history_dense_dim
+
+
 		self.fc_query = nn.Linear(self.query_dim, self.embed_dim)
 		self.fc_att = nn.Linear(self.embed_dim, self.embed_dim)
 		self.fc_conv = nn.Linear(self.embed_dim, self.embed_dim)
@@ -213,6 +223,9 @@ class Net(nn.Module):
 			wiki_top_bert_feat_ = self.wiki_bert_dense1_dense(wiki_top_bert_feat_)
 			wiki_top_bert_feat_ = self.wiki_bert_output_dense(wiki_top_bert_feat_)
 
+		if "credit_history_feat" in augmented_feat:
+			credit_history_ = Variable(sample.credithistory_vect).unsqueeze(0)
+			credit_history_ = self.credit_history_dense_nlayers(credit_history_ )
 
 
 		# Statement
@@ -221,6 +234,8 @@ class Net(nn.Module):
 			query_element_tuple += (wiki_liwc_feats_,)
 		if 'wiki_bert_feat' in augmented_feat:
 			query_element_tuple += (wiki_top_bert_feat_,)
+		if "credit_history_feat" in augmented_feat:
+			query_element_tuple += (credit_history_ ,)
 
 		query = torch.cat(query_element_tuple, 1)
 		query = F.leaky_relu(self.fc_query(query))
@@ -250,6 +265,8 @@ class Net(nn.Module):
 			feats_element_tuple += (wiki_liwc_feats_,)
 		if 'wiki_bert_feat' in augmented_feat:
 			feats_element_tuple += (wiki_top_bert_feat_,)
+		if "credit_history_feat" in augmented_feat:
+			feats_element_tuple += (credit_history_,)
 		features = torch.cat(feats_element_tuple, 1)
 		features = self.dropout_features(features)
 		out = self.fc(features)

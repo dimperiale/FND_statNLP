@@ -354,7 +354,7 @@ def train_data_prepare_augmented(train_filename, num_classes, dataset_name, wiki
 	if liwcdict_filename is not None:
 		with open(liwcdict_filename, 'rb') as f:
 			liwcdict = pickle.load(f)
-    if creditdict_filename is not None:
+	if creditdict_filename is not None:
 		with open(creditdict_filename, 'rb') as f:
 			creditdict = pickle.load(f)
 	if row_to_json is not None:
@@ -394,7 +394,7 @@ def train_data_prepare_augmented(train_filename, num_classes, dataset_name, wiki
 					tmp.append('')
 				p = DataSample_augmented(tmp[1], tmp[2], tmp[3], tmp[4], tmp[5] , tmp[6], tmp[7], tmp[13],'',\
                                          num_classes, dataset_name,
-										 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,credit=credit_dict_feat,bert_feat=bert_feat, credit =)
+										 wikictionary=wiki_dict_feat,liwc=liwc_dict_feat,credit=credit_dict_feat,bert_feat=bert_feat)
 			else:
 				#---LIAR-PLUS
 				while len(tmp) < 16:
@@ -547,8 +547,8 @@ def test_data_prepare_augmented(test_file, word2num, phase, num_classes, dataset
 	if liwcdict_filename is not None:
 		with open(liwcdict_filename, 'rb') as f:
 			liwcdict = pickle.load(f)
-	if credit_filename is not None:
-		with open(credit_filename, 'rb') as f:
+	if creditdict_filename is not None:
+		with open(creditdict_filename, 'rb') as f:
 			creditdict = pickle.load(f)
 	if row_to_json is not None:
 		row_idx_to_jsonid = {}

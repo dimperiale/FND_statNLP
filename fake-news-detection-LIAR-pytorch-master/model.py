@@ -33,7 +33,7 @@ class Net(nn.Module):
 				 justification_lstm_nlayers = 2,
 				 justification_lstm_bidirectional = True,
 
-				 wiki_liwc_input_dim = 70, # 5 + 65
+				 wiki_liwc_input_dim = 69, # 5 + 65
 				 wiki_liwc_nn_dim = 10,
 
 				 bert_feat_input_dim = 768*3, 

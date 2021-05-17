@@ -1,0 +1,160 @@
+features: baseline
+feat_list: []
+fault: 0
+  Constructing network model...
+Hyperparams are:
+num_classes :  6
+epoch :  30
+lr :  0.001
+embed_dim :  100
+statement_kernel_num :  64
+statement_kernel_size :  [3, 4, 5]
+subject_hidden_dim :  8
+subject_lstm_nlayers :  2
+subject_lstm_bidirectional :  True
+speaker_pos_hidden_dim :  8
+speaker_pos_lstm_nlayers :  2
+speaker_pos_lstm_bidirectional :  True
+context_hidden_dim :  16
+context_lstm_nlayers :  2
+context_lstm_bidirectional :  True
+justification_hidden_dim :  32
+justification_lstm_nlayers :  2
+justification_lstm_bidirectional :  True
+dropout_query :  0.5
+dropout_features :  0.7
+LOADED FROM PATHMODEL: ./models/m-fake-net-num_classes-6-17052021-150746-epoch-22-val_acc-0.259.pth.tar
+  Test Accuracy: 0.224
+              precision    recall  f1-score   support
+
+  pants-fire    0.34483   0.21739   0.26667        92
+       false    0.23445   0.39200   0.29341       250
+ barely-true    0.17347   0.07944   0.10897       214
+   half-true    0.20690   0.20225   0.20455       267
+ mostly-true    0.22849   0.30924   0.26280       249
+        true    0.18919   0.09953   0.13043       211
+
+    accuracy                        0.22369      1283
+   macro avg    0.22955   0.21664   0.21114      1283
+weighted avg    0.21786   0.22369   0.20949      1283
+
+features: augmented
+feat_list: ['wiki_liwc_dict']
+fault: 0
+  Constructing network model...
+Hyperparams are:
+num_classes :  6
+epoch :  30
+lr :  0.001
+embed_dim :  100
+statement_kernel_num :  64
+statement_kernel_size :  [3, 4, 5]
+subject_hidden_dim :  8
+subject_lstm_nlayers :  2
+subject_lstm_bidirectional :  True
+speaker_pos_hidden_dim :  8
+speaker_pos_lstm_nlayers :  2
+speaker_pos_lstm_bidirectional :  True
+context_hidden_dim :  16
+context_lstm_nlayers :  2
+context_lstm_bidirectional :  True
+justification_hidden_dim :  32
+justification_lstm_nlayers :  2
+justification_lstm_bidirectional :  True
+dropout_query :  0.5
+dropout_features :  0.7
+LOADED FROM PATHMODEL: ./models/m-fake-nettime-2021_05_17_18_30_56--num_classes-6-17052021-151135-epoch-25-val_acc-0.273-new_feats-wiki_liwc_dict.pth.tar
+  Test Accuracy: 0.229
+              precision    recall  f1-score   support
+
+  pants-fire    0.35294   0.19565   0.25175        92
+       false    0.22687   0.30400   0.25983       250
+ barely-true    0.20438   0.13084   0.15954       214
+   half-true    0.22318   0.19476   0.20800       267
+ mostly-true    0.22039   0.32129   0.26144       249
+        true    0.24390   0.18957   0.21333       211
+
+    accuracy                        0.22915      1283
+   macro avg    0.24528   0.22268   0.22565      1283
+weighted avg    0.23293   0.22915   0.22440      1283
+
+features: augmented
+feat_list: ['wiki_bert_feat']
+fault: 0
+  Constructing network model...
+Hyperparams are:
+num_classes :  6
+epoch :  30
+lr :  0.001
+embed_dim :  100
+statement_kernel_num :  64
+statement_kernel_size :  [3, 4, 5]
+subject_hidden_dim :  8
+subject_lstm_nlayers :  2
+subject_lstm_bidirectional :  True
+speaker_pos_hidden_dim :  8
+speaker_pos_lstm_nlayers :  2
+speaker_pos_lstm_bidirectional :  True
+context_hidden_dim :  16
+context_lstm_nlayers :  2
+context_lstm_bidirectional :  True
+justification_hidden_dim :  32
+justification_lstm_nlayers :  2
+justification_lstm_bidirectional :  True
+dropout_query :  0.5
+dropout_features :  0.7
+LOADED FROM PATHMODEL: ./models/m-fake-nettime-2021_05_17_17_24_50--num_classes-6-17052021-150951-epoch-17-val_acc-0.252-new_feats-wiki_bert_feat.pth.tar
+  Test Accuracy: 0.235
+              precision    recall  f1-score   support
+
+  pants-fire    0.39583   0.20652   0.27143        92
+       false    0.23018   0.36000   0.28081       250
+ barely-true    0.15306   0.07009   0.09615       214
+   half-true    0.22636   0.29588   0.25649       267
+ mostly-true    0.27586   0.22490   0.24779       249
+        true    0.22165   0.20379   0.21235       211
+
+    accuracy                        0.23539      1283
+   macro avg    0.25049   0.22686   0.22750      1283
+weighted avg    0.23586   0.23539   0.22661      1283
+
+features: augmented
+feat_list: ['wiki_liwc_dict', 'wiki_bert_feat']
+fault: 0
+  Constructing network model...
+Hyperparams are:
+num_classes :  6
+epoch :  30
+lr :  0.001
+embed_dim :  100
+statement_kernel_num :  64
+statement_kernel_size :  [3, 4, 5]
+subject_hidden_dim :  8
+subject_lstm_nlayers :  2
+subject_lstm_bidirectional :  True
+speaker_pos_hidden_dim :  8
+speaker_pos_lstm_nlayers :  2
+speaker_pos_lstm_bidirectional :  True
+context_hidden_dim :  16
+context_lstm_nlayers :  2
+context_lstm_bidirectional :  True
+justification_hidden_dim :  32
+justification_lstm_nlayers :  2
+justification_lstm_bidirectional :  True
+dropout_query :  0.5
+dropout_features :  0.7
+LOADED FROM PATHMODEL: ./models/m-fake-nettime-2021_05_17_18_18_48--num_classes-6-17052021-151146-epoch-22-val_acc-0.271-new_feats-wiki_liwc_dict-wiki_bert_feat.pth.tar
+  Test Accuracy: 0.238
+              precision    recall  f1-score   support
+
+  pants-fire    0.38182   0.22826   0.28571        92
+       false    0.21581   0.28400   0.24525       250
+ barely-true    0.20958   0.16355   0.18373       214
+   half-true    0.21587   0.25468   0.23368       267
+ mostly-true    0.25356   0.35743   0.29667       249
+        true    0.31818   0.09953   0.15162       211
+
+    accuracy                        0.23772      1283
+   macro avg    0.26580   0.23124   0.23278      1283
+weighted avg    0.25085   0.23772   0.23006      1283
+

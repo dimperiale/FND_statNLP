@@ -726,3 +726,27 @@ Saved:  m-fake-nettime-2021_05_17_04_08_38--num_classes-6-17052021-011445-epoch-
   [INFO] - Epoch 30/30 Step:: 300000 Loss: 0.951
   [INFO] - Epoch 30/30 Step:: 300500 Loss: 0.984
   [INFO] - Epoch 30/30 Step:: 301000 Loss: 1.334
+  [INFO] - Epoch 30/30 Step:: 301500 Loss: 1.597
+  [INFO] - Epoch 30/30 Step:: 302000 Loss: 3.200
+  [INFO] - Epoch 30/30 Step:: 302500 Loss: 0.161
+  [INFO] - Epoch 30/30 Step:: 303000 Loss: 1.026
+  [INFO] - Epoch 30/30 Step:: 303500 Loss: 2.252
+  [INFO] - Epoch 30/30 Step:: 304000 Loss: 1.427
+  [INFO] - Epoch 30/30 Step:: 304500 Loss: 1.228
+  [INFO] - Epoch 30/30 Step:: 305000 Loss: 0.288
+  [INFO] - Epoch 30/30 Step:: 305500 Loss: 1.428
+  [INFO] - Epoch 30/30 Step:: 306000 Loss: 0.065
+  [INFO] - Epoch 30/30 Step:: 306500 Loss: 2.475
+  [INFO] - Epoch 30/30 Step:: 307000 Loss: 2.218
+  [INFO] - Epoch 30/30 Step:: 307500 Loss: 1.371
+  [INFO] - Epoch 30/30 Step:: 308000 Loss: 6.549
+  [INFO] --- Epoch 30 complete. Avg. Loss: 1.615  Time taken: 10305.073
+  Validation Accuracy: 0.265
+Saved:  m-fake-nettime-2021_05_17_04_14_22--num_classes-6-17052021-011445-epoch-29-val_acc-0.265-new_feats-wiki_liwc_dict-wiki_bert_feat.pth.tar
+PATHMODEL could not be loaded: None
+Traceback (most recent call last):
+  File "main.py", line 260, in <module>
+    driver('train2.tsv', 'val2.tsv', 'test2.tsv', 'predictions.txt', dataset_name, mode, features, pathModel, hyper, feat_list=feat_list)
+  File "main.py", line 170, in driver
+    test_acc = test(test_samples, output_file, model, num_classes, use_cuda, feat_list=feat_list)
+UnboundLocalError: local variable 'test_samples' referenced before assignment

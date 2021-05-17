@@ -285,3 +285,468 @@ Saved:  m-fake-nettime-2021_05_17_04_07_08--num_classes-6-17052021-030322-epoch-
   [INFO] - Epoch 11/30 Step:: 108000 Loss: 0.860
   [INFO] - Epoch 11/30 Step:: 108500 Loss: 2.294
   [INFO] - Epoch 11/30 Step:: 109000 Loss: 2.546
+  [INFO] - Epoch 11/30 Step:: 109500 Loss: 2.298
+  [INFO] - Epoch 11/30 Step:: 110000 Loss: 1.415
+  [INFO] - Epoch 11/30 Step:: 110500 Loss: 0.848
+  [INFO] - Epoch 11/30 Step:: 111000 Loss: 3.089
+  [INFO] - Epoch 11/30 Step:: 111500 Loss: 0.482
+  [INFO] - Epoch 11/30 Step:: 112000 Loss: 1.930
+  [INFO] - Epoch 11/30 Step:: 112500 Loss: 0.735
+  [INFO] --- Epoch 11 complete. Avg. Loss: 1.796  Time taken: 3552.870
+  Validation Accuracy: 0.240
+Saved:  m-fake-nettime-2021_05_17_04_12_29--num_classes-6-17052021-030322-epoch-10-val_acc-0.240-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 12/30 Step:: 113000 Loss: 1.194
+  [INFO] - Epoch 12/30 Step:: 113500 Loss: 0.703
+  [INFO] - Epoch 12/30 Step:: 114000 Loss: 1.870
+  [INFO] - Epoch 12/30 Step:: 114500 Loss: 0.712
+  [INFO] - Epoch 12/30 Step:: 115000 Loss: 2.561
+  [INFO] - Epoch 12/30 Step:: 115500 Loss: 1.359
+  [INFO] - Epoch 12/30 Step:: 116000 Loss: 0.712
+  [INFO] - Epoch 12/30 Step:: 116500 Loss: 0.384
+  [INFO] - Epoch 12/30 Step:: 117000 Loss: 1.258
+  [INFO] - Epoch 12/30 Step:: 117500 Loss: 1.898
+  [INFO] - Epoch 12/30 Step:: 118000 Loss: 3.294
+  [INFO] - Epoch 12/30 Step:: 118500 Loss: 2.197
+  [INFO] - Epoch 12/30 Step:: 119000 Loss: 2.232
+  [INFO] - Epoch 12/30 Step:: 119500 Loss: 2.615
+  [INFO] - Epoch 12/30 Step:: 120000 Loss: 1.293
+  [INFO] - Epoch 12/30 Step:: 120500 Loss: 0.609
+  [INFO] - Epoch 12/30 Step:: 121000 Loss: 3.340
+  [INFO] - Epoch 12/30 Step:: 121500 Loss: 1.550
+  [INFO] - Epoch 12/30 Step:: 122000 Loss: 2.877
+  [INFO] - Epoch 12/30 Step:: 122500 Loss: 3.400
+  [INFO] - Epoch 12/30 Step:: 123000 Loss: 1.134
+  [INFO] --- Epoch 12 complete. Avg. Loss: 1.766  Time taken: 3833.964
+  Validation Accuracy: 0.216
+Saved:  m-fake-nettime-2021_05_17_04_17_10--num_classes-6-17052021-030322-epoch-11-val_acc-0.216-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 13/30 Step:: 123500 Loss: 2.908
+  [INFO] - Epoch 13/30 Step:: 124000 Loss: 2.012
+  [INFO] - Epoch 13/30 Step:: 124500 Loss: 2.166
+  [INFO] - Epoch 13/30 Step:: 125000 Loss: 4.222
+  [INFO] - Epoch 13/30 Step:: 125500 Loss: 1.881
+  [INFO] - Epoch 13/30 Step:: 126000 Loss: 0.450
+  [INFO] - Epoch 13/30 Step:: 126500 Loss: 2.179
+  [INFO] - Epoch 13/30 Step:: 127000 Loss: 1.307
+  [INFO] - Epoch 13/30 Step:: 127500 Loss: 1.775
+  [INFO] - Epoch 13/30 Step:: 128000 Loss: 1.282
+  [INFO] - Epoch 13/30 Step:: 128500 Loss: 2.262
+  [INFO] - Epoch 13/30 Step:: 129000 Loss: 2.879
+  [INFO] - Epoch 13/30 Step:: 129500 Loss: 0.988
+  [INFO] - Epoch 13/30 Step:: 130000 Loss: 0.514
+  [INFO] - Epoch 13/30 Step:: 130500 Loss: 1.463
+  [INFO] - Epoch 13/30 Step:: 131000 Loss: 2.278
+  [INFO] - Epoch 13/30 Step:: 131500 Loss: 0.999
+  [INFO] - Epoch 13/30 Step:: 132000 Loss: 2.642
+  [INFO] - Epoch 13/30 Step:: 132500 Loss: 2.458
+  [INFO] - Epoch 13/30 Step:: 133000 Loss: 1.338
+  [INFO] --- Epoch 13 complete. Avg. Loss: 1.745  Time taken: 4130.707
+  Validation Accuracy: 0.225
+Saved:  m-fake-nettime-2021_05_17_04_22_07--num_classes-6-17052021-030322-epoch-12-val_acc-0.225-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 14/30 Step:: 133500 Loss: 2.080
+  [INFO] - Epoch 14/30 Step:: 134000 Loss: 0.808
+  [INFO] - Epoch 14/30 Step:: 134500 Loss: 0.898
+  [INFO] - Epoch 14/30 Step:: 135000 Loss: 1.337
+  [INFO] - Epoch 14/30 Step:: 135500 Loss: 1.516
+  [INFO] - Epoch 14/30 Step:: 136000 Loss: 1.707
+  [INFO] - Epoch 14/30 Step:: 136500 Loss: 3.328
+  [INFO] - Epoch 14/30 Step:: 137000 Loss: 0.738
+  [INFO] - Epoch 14/30 Step:: 137500 Loss: 1.283
+  [INFO] - Epoch 14/30 Step:: 138000 Loss: 2.184
+  [INFO] - Epoch 14/30 Step:: 138500 Loss: 2.346
+  [INFO] - Epoch 14/30 Step:: 139000 Loss: 1.983
+  [INFO] - Epoch 14/30 Step:: 139500 Loss: 3.895
+  [INFO] - Epoch 14/30 Step:: 140000 Loss: 0.779
+  [INFO] - Epoch 14/30 Step:: 140500 Loss: 2.550
+  [INFO] - Epoch 14/30 Step:: 141000 Loss: 1.751
+  [INFO] - Epoch 14/30 Step:: 141500 Loss: 2.860
+  [INFO] - Epoch 14/30 Step:: 142000 Loss: 1.959
+  [INFO] - Epoch 14/30 Step:: 142500 Loss: 2.268
+  [INFO] - Epoch 14/30 Step:: 143000 Loss: 1.921
+  [INFO] - Epoch 14/30 Step:: 143500 Loss: 0.477
+  [INFO] --- Epoch 14 complete. Avg. Loss: 1.723  Time taken: 4445.385
+  Validation Accuracy: 0.231
+Saved:  m-fake-nettime-2021_05_17_04_27_22--num_classes-6-17052021-030322-epoch-13-val_acc-0.231-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 15/30 Step:: 144000 Loss: 0.676
+  [INFO] - Epoch 15/30 Step:: 144500 Loss: 1.324
+  [INFO] - Epoch 15/30 Step:: 145000 Loss: 0.982
+  [INFO] - Epoch 15/30 Step:: 145500 Loss: 1.498
+  [INFO] - Epoch 15/30 Step:: 146000 Loss: 2.038
+  [INFO] - Epoch 15/30 Step:: 146500 Loss: 2.273
+  [INFO] - Epoch 15/30 Step:: 147000 Loss: 1.542
+  [INFO] - Epoch 15/30 Step:: 147500 Loss: 1.337
+  [INFO] - Epoch 15/30 Step:: 148000 Loss: 0.525
+  [INFO] - Epoch 15/30 Step:: 148500 Loss: 2.177
+  [INFO] - Epoch 15/30 Step:: 149000 Loss: 1.895
+  [INFO] - Epoch 15/30 Step:: 149500 Loss: 2.787
+  [INFO] - Epoch 15/30 Step:: 150000 Loss: 0.953
+  [INFO] - Epoch 15/30 Step:: 150500 Loss: 1.593
+  [INFO] - Epoch 15/30 Step:: 151000 Loss: 1.100
+  [INFO] - Epoch 15/30 Step:: 151500 Loss: 0.863
+  [INFO] - Epoch 15/30 Step:: 152000 Loss: 0.681
+  [INFO] - Epoch 15/30 Step:: 152500 Loss: 1.184
+  [INFO] - Epoch 15/30 Step:: 153000 Loss: 1.074
+  [INFO] - Epoch 15/30 Step:: 153500 Loss: 0.636
+  [INFO] - Epoch 15/30 Step:: 154000 Loss: 1.470
+  [INFO] --- Epoch 15 complete. Avg. Loss: 1.704  Time taken: 4781.066
+  Validation Accuracy: 0.245
+Saved:  m-fake-nettime-2021_05_17_04_32_57--num_classes-6-17052021-030322-epoch-14-val_acc-0.245-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 16/30 Step:: 154500 Loss: 1.648
+  [INFO] - Epoch 16/30 Step:: 155000 Loss: 1.672
+  [INFO] - Epoch 16/30 Step:: 155500 Loss: 2.499
+  [INFO] - Epoch 16/30 Step:: 156000 Loss: 0.694
+  [INFO] - Epoch 16/30 Step:: 156500 Loss: 0.567
+  [INFO] - Epoch 16/30 Step:: 157000 Loss: 3.002
+  [INFO] - Epoch 16/30 Step:: 157500 Loss: 3.555
+  [INFO] - Epoch 16/30 Step:: 158000 Loss: 2.200
+  [INFO] - Epoch 16/30 Step:: 158500 Loss: 4.217
+  [INFO] - Epoch 16/30 Step:: 159000 Loss: 3.330
+  [INFO] - Epoch 16/30 Step:: 159500 Loss: 3.773
+  [INFO] - Epoch 16/30 Step:: 160000 Loss: 1.159
+  [INFO] - Epoch 16/30 Step:: 160500 Loss: 3.153
+  [INFO] - Epoch 16/30 Step:: 161000 Loss: 0.916
+  [INFO] - Epoch 16/30 Step:: 161500 Loss: 2.273
+  [INFO] - Epoch 16/30 Step:: 162000 Loss: 0.711
+  [INFO] - Epoch 16/30 Step:: 162500 Loss: 0.867
+  [INFO] - Epoch 16/30 Step:: 163000 Loss: 1.928
+  [INFO] - Epoch 16/30 Step:: 163500 Loss: 0.518
+  [INFO] - Epoch 16/30 Step:: 164000 Loss: 0.877
+  [INFO] --- Epoch 16 complete. Avg. Loss: 1.666  Time taken: 5085.338
+  Validation Accuracy: 0.236
+Saved:  m-fake-nettime-2021_05_17_04_38_02--num_classes-6-17052021-030322-epoch-15-val_acc-0.236-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 17/30 Step:: 164500 Loss: 2.035
+  [INFO] - Epoch 17/30 Step:: 165000 Loss: 1.219
+  [INFO] - Epoch 17/30 Step:: 165500 Loss: 1.538
+  [INFO] - Epoch 17/30 Step:: 166000 Loss: 1.208
+  [INFO] - Epoch 17/30 Step:: 166500 Loss: 1.632
+  [INFO] - Epoch 17/30 Step:: 167000 Loss: 1.215
+  [INFO] - Epoch 17/30 Step:: 167500 Loss: 1.369
+  [INFO] - Epoch 17/30 Step:: 168000 Loss: 2.988
+  [INFO] - Epoch 17/30 Step:: 168500 Loss: 1.279
+  [INFO] - Epoch 17/30 Step:: 169000 Loss: 3.292
+  [INFO] - Epoch 17/30 Step:: 169500 Loss: 2.064
+  [INFO] - Epoch 17/30 Step:: 170000 Loss: 2.603
+  [INFO] - Epoch 17/30 Step:: 170500 Loss: 0.440
+  [INFO] - Epoch 17/30 Step:: 171000 Loss: 5.015
+  [INFO] - Epoch 17/30 Step:: 171500 Loss: 1.413
+  [INFO] - Epoch 17/30 Step:: 172000 Loss: 0.829
+  [INFO] - Epoch 17/30 Step:: 172500 Loss: 2.356
+  [INFO] - Epoch 17/30 Step:: 173000 Loss: 1.471
+  [INFO] - Epoch 17/30 Step:: 173500 Loss: 2.546
+  [INFO] - Epoch 17/30 Step:: 174000 Loss: 3.737
+  [INFO] - Epoch 17/30 Step:: 174500 Loss: 1.831
+  [INFO] --- Epoch 17 complete. Avg. Loss: 1.656  Time taken: 5383.280
+  Validation Accuracy: 0.243
+Saved:  m-fake-nettime-2021_05_17_04_43_00--num_classes-6-17052021-030322-epoch-16-val_acc-0.243-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 18/30 Step:: 175000 Loss: 1.956
+  [INFO] - Epoch 18/30 Step:: 175500 Loss: 1.807
+  [INFO] - Epoch 18/30 Step:: 176000 Loss: 1.025
+  [INFO] - Epoch 18/30 Step:: 176500 Loss: 0.896
+  [INFO] - Epoch 18/30 Step:: 177000 Loss: 0.388
+  [INFO] - Epoch 18/30 Step:: 177500 Loss: 0.452
+  [INFO] - Epoch 18/30 Step:: 178000 Loss: 2.854
+  [INFO] - Epoch 18/30 Step:: 178500 Loss: 0.565
+  [INFO] - Epoch 18/30 Step:: 179000 Loss: 2.762
+  [INFO] - Epoch 18/30 Step:: 179500 Loss: 1.112
+  [INFO] - Epoch 18/30 Step:: 180000 Loss: 1.415
+  [INFO] - Epoch 18/30 Step:: 180500 Loss: 1.551
+  [INFO] - Epoch 18/30 Step:: 181000 Loss: 1.003
+  [INFO] - Epoch 18/30 Step:: 181500 Loss: 2.855
+  [INFO] - Epoch 18/30 Step:: 182000 Loss: 0.428
+  [INFO] - Epoch 18/30 Step:: 182500 Loss: 1.587
+  [INFO] - Epoch 18/30 Step:: 183000 Loss: 0.252
+  [INFO] - Epoch 18/30 Step:: 183500 Loss: 1.117
+  [INFO] - Epoch 18/30 Step:: 184000 Loss: 0.615
+  [INFO] - Epoch 18/30 Step:: 184500 Loss: 1.162
+  [INFO] --- Epoch 18 complete. Avg. Loss: 1.639  Time taken: 5697.216
+  Validation Accuracy: 0.234
+Saved:  m-fake-nettime-2021_05_17_04_48_14--num_classes-6-17052021-030322-epoch-17-val_acc-0.234-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 19/30 Step:: 185000 Loss: 0.884
+  [INFO] - Epoch 19/30 Step:: 185500 Loss: 2.881
+  [INFO] - Epoch 19/30 Step:: 186000 Loss: 0.729
+  [INFO] - Epoch 19/30 Step:: 186500 Loss: 0.696
+  [INFO] - Epoch 19/30 Step:: 187000 Loss: 0.914
+  [INFO] - Epoch 19/30 Step:: 187500 Loss: 1.266
+  [INFO] - Epoch 19/30 Step:: 188000 Loss: 0.839
+  [INFO] - Epoch 19/30 Step:: 188500 Loss: 1.630
+  [INFO] - Epoch 19/30 Step:: 189000 Loss: 1.099
+  [INFO] - Epoch 19/30 Step:: 189500 Loss: 1.917
+  [INFO] - Epoch 19/30 Step:: 190000 Loss: 1.681
+  [INFO] - Epoch 19/30 Step:: 190500 Loss: 2.735
+  [INFO] - Epoch 19/30 Step:: 191000 Loss: 0.628
+  [INFO] - Epoch 19/30 Step:: 191500 Loss: 0.302
+  [INFO] - Epoch 19/30 Step:: 192000 Loss: 1.777
+  [INFO] - Epoch 19/30 Step:: 192500 Loss: 0.712
+  [INFO] - Epoch 19/30 Step:: 193000 Loss: 1.653
+  [INFO] - Epoch 19/30 Step:: 193500 Loss: 2.380
+  [INFO] - Epoch 19/30 Step:: 194000 Loss: 1.779
+  [INFO] - Epoch 19/30 Step:: 194500 Loss: 0.917
+  [INFO] - Epoch 19/30 Step:: 195000 Loss: 0.904
+  [INFO] --- Epoch 19 complete. Avg. Loss: 1.613  Time taken: 6073.527
+  Validation Accuracy: 0.231
+Saved:  m-fake-nettime-2021_05_17_04_54_30--num_classes-6-17052021-030322-epoch-18-val_acc-0.231-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 20/30 Step:: 195500 Loss: 0.690
+  [INFO] - Epoch 20/30 Step:: 196000 Loss: 3.116
+  [INFO] - Epoch 20/30 Step:: 196500 Loss: 2.982
+  [INFO] - Epoch 20/30 Step:: 197000 Loss: 3.075
+  [INFO] - Epoch 20/30 Step:: 197500 Loss: 2.343
+  [INFO] - Epoch 20/30 Step:: 198000 Loss: 4.645
+  [INFO] - Epoch 20/30 Step:: 198500 Loss: 0.065
+  [INFO] - Epoch 20/30 Step:: 199000 Loss: 1.288
+  [INFO] - Epoch 20/30 Step:: 199500 Loss: 1.106
+  [INFO] - Epoch 20/30 Step:: 200000 Loss: 1.141
+  [INFO] - Epoch 20/30 Step:: 200500 Loss: 1.885
+  [INFO] - Epoch 20/30 Step:: 201000 Loss: 1.729
+  [INFO] - Epoch 20/30 Step:: 201500 Loss: 1.344
+  [INFO] - Epoch 20/30 Step:: 202000 Loss: 0.958
+  [INFO] - Epoch 20/30 Step:: 202500 Loss: 1.130
+  [INFO] - Epoch 20/30 Step:: 203000 Loss: 0.972
+  [INFO] - Epoch 20/30 Step:: 203500 Loss: 4.171
+  [INFO] - Epoch 20/30 Step:: 204000 Loss: 1.232
+  [INFO] - Epoch 20/30 Step:: 204500 Loss: 1.554
+  [INFO] - Epoch 20/30 Step:: 205000 Loss: 0.488
+  [INFO] --- Epoch 20 complete. Avg. Loss: 1.586  Time taken: 6430.246
+  Validation Accuracy: 0.236
+Saved:  m-fake-nettime-2021_05_17_05_00_27--num_classes-6-17052021-030322-epoch-19-val_acc-0.236-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 21/30 Step:: 205500 Loss: 1.217
+  [INFO] - Epoch 21/30 Step:: 206000 Loss: 1.564
+  [INFO] - Epoch 21/30 Step:: 206500 Loss: 1.142
+  [INFO] - Epoch 21/30 Step:: 207000 Loss: 1.673
+  [INFO] - Epoch 21/30 Step:: 207500 Loss: 2.683
+  [INFO] - Epoch 21/30 Step:: 208000 Loss: 2.325
+  [INFO] - Epoch 21/30 Step:: 208500 Loss: 2.560
+  [INFO] - Epoch 21/30 Step:: 209000 Loss: 2.181
+  [INFO] - Epoch 21/30 Step:: 209500 Loss: 1.184
+  [INFO] - Epoch 21/30 Step:: 210000 Loss: 1.056
+  [INFO] - Epoch 21/30 Step:: 210500 Loss: 1.105
+  [INFO] - Epoch 21/30 Step:: 211000 Loss: 3.736
+  [INFO] - Epoch 21/30 Step:: 211500 Loss: 0.132
+  [INFO] - Epoch 21/30 Step:: 212000 Loss: 1.226
+  [INFO] - Epoch 21/30 Step:: 212500 Loss: 0.862
+  [INFO] - Epoch 21/30 Step:: 213000 Loss: 1.422
+  [INFO] - Epoch 21/30 Step:: 213500 Loss: 2.727
+  [INFO] - Epoch 21/30 Step:: 214000 Loss: 2.152
+  [INFO] - Epoch 21/30 Step:: 214500 Loss: 2.344
+  [INFO] - Epoch 21/30 Step:: 215000 Loss: 0.238
+  [INFO] - Epoch 21/30 Step:: 215500 Loss: 2.388
+  [INFO] --- Epoch 21 complete. Avg. Loss: 1.562  Time taken: 6823.995
+  Validation Accuracy: 0.224
+Saved:  m-fake-nettime-2021_05_17_05_07_00--num_classes-6-17052021-030322-epoch-20-val_acc-0.224-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 22/30 Step:: 216000 Loss: 1.684
+  [INFO] - Epoch 22/30 Step:: 216500 Loss: 1.447
+  [INFO] - Epoch 22/30 Step:: 217000 Loss: 2.495
+  [INFO] - Epoch 22/30 Step:: 217500 Loss: 2.585
+  [INFO] - Epoch 22/30 Step:: 218000 Loss: 1.837
+  [INFO] - Epoch 22/30 Step:: 218500 Loss: 1.879
+  [INFO] - Epoch 22/30 Step:: 219000 Loss: 0.875
+  [INFO] - Epoch 22/30 Step:: 219500 Loss: 2.778
+  [INFO] - Epoch 22/30 Step:: 220000 Loss: 1.033
+  [INFO] - Epoch 22/30 Step:: 220500 Loss: 2.577
+  [INFO] - Epoch 22/30 Step:: 221000 Loss: 1.931
+  [INFO] - Epoch 22/30 Step:: 221500 Loss: 2.652
+  [INFO] - Epoch 22/30 Step:: 222000 Loss: 0.979
+  [INFO] - Epoch 22/30 Step:: 222500 Loss: 1.935
+  [INFO] - Epoch 22/30 Step:: 223000 Loss: 2.996
+  [INFO] - Epoch 22/30 Step:: 223500 Loss: 0.870
+  [INFO] - Epoch 22/30 Step:: 224000 Loss: 0.368
+  [INFO] - Epoch 22/30 Step:: 224500 Loss: 0.485
+  [INFO] - Epoch 22/30 Step:: 225000 Loss: 0.597
+  [INFO] - Epoch 22/30 Step:: 225500 Loss: 3.406
+  [INFO] --- Epoch 22 complete. Avg. Loss: 1.556  Time taken: 7111.307
+  Validation Accuracy: 0.224
+Saved:  m-fake-nettime-2021_05_17_05_11_48--num_classes-6-17052021-030322-epoch-21-val_acc-0.224-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 23/30 Step:: 226000 Loss: 1.803
+  [INFO] - Epoch 23/30 Step:: 226500 Loss: 2.012
+  [INFO] - Epoch 23/30 Step:: 227000 Loss: 0.594
+  [INFO] - Epoch 23/30 Step:: 227500 Loss: 1.138
+  [INFO] - Epoch 23/30 Step:: 228000 Loss: 1.312
+  [INFO] - Epoch 23/30 Step:: 228500 Loss: 0.652
+  [INFO] - Epoch 23/30 Step:: 229000 Loss: 1.697
+  [INFO] - Epoch 23/30 Step:: 229500 Loss: 2.044
+  [INFO] - Epoch 23/30 Step:: 230000 Loss: 0.169
+  [INFO] - Epoch 23/30 Step:: 230500 Loss: 0.896
+  [INFO] - Epoch 23/30 Step:: 231000 Loss: 0.226
+  [INFO] - Epoch 23/30 Step:: 231500 Loss: 1.843
+  [INFO] - Epoch 23/30 Step:: 232000 Loss: 0.617
+  [INFO] - Epoch 23/30 Step:: 232500 Loss: 0.762
+  [INFO] - Epoch 23/30 Step:: 233000 Loss: 1.427
+  [INFO] - Epoch 23/30 Step:: 233500 Loss: 1.327
+  [INFO] - Epoch 23/30 Step:: 234000 Loss: 2.440
+  [INFO] - Epoch 23/30 Step:: 234500 Loss: 0.963
+  [INFO] - Epoch 23/30 Step:: 235000 Loss: 1.950
+  [INFO] - Epoch 23/30 Step:: 235500 Loss: 1.116
+  [INFO] - Epoch 23/30 Step:: 236000 Loss: 0.465
+  [INFO] --- Epoch 23 complete. Avg. Loss: 1.533  Time taken: 7409.498
+  Validation Accuracy: 0.238
+Saved:  m-fake-nettime-2021_05_17_05_16_46--num_classes-6-17052021-030322-epoch-22-val_acc-0.238-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 24/30 Step:: 236500 Loss: 2.041
+  [INFO] - Epoch 24/30 Step:: 237000 Loss: 0.414
+  [INFO] - Epoch 24/30 Step:: 237500 Loss: 0.560
+  [INFO] - Epoch 24/30 Step:: 238000 Loss: 0.619
+  [INFO] - Epoch 24/30 Step:: 238500 Loss: 0.749
+  [INFO] - Epoch 24/30 Step:: 239000 Loss: 0.483
+  [INFO] - Epoch 24/30 Step:: 239500 Loss: 1.794
+  [INFO] - Epoch 24/30 Step:: 240000 Loss: 5.399
+  [INFO] - Epoch 24/30 Step:: 240500 Loss: 0.820
+  [INFO] - Epoch 24/30 Step:: 241000 Loss: 4.113
+  [INFO] - Epoch 24/30 Step:: 241500 Loss: 0.260
+  [INFO] - Epoch 24/30 Step:: 242000 Loss: 1.268
+  [INFO] - Epoch 24/30 Step:: 242500 Loss: 2.235
+  [INFO] - Epoch 24/30 Step:: 243000 Loss: 3.031
+  [INFO] - Epoch 24/30 Step:: 243500 Loss: 1.401
+  [INFO] - Epoch 24/30 Step:: 244000 Loss: 2.267
+  [INFO] - Epoch 24/30 Step:: 244500 Loss: 0.159
+  [INFO] - Epoch 24/30 Step:: 245000 Loss: 1.983
+  [INFO] - Epoch 24/30 Step:: 245500 Loss: 2.790
+  [INFO] - Epoch 24/30 Step:: 246000 Loss: 0.717
+  [INFO] --- Epoch 24 complete. Avg. Loss: 1.502  Time taken: 7714.292
+  Validation Accuracy: 0.217
+Saved:  m-fake-nettime-2021_05_17_05_21_51--num_classes-6-17052021-030322-epoch-23-val_acc-0.217-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 25/30 Step:: 246500 Loss: 0.508
+  [INFO] - Epoch 25/30 Step:: 247000 Loss: 2.230
+  [INFO] - Epoch 25/30 Step:: 247500 Loss: 0.404
+  [INFO] - Epoch 25/30 Step:: 248000 Loss: 1.135
+  [INFO] - Epoch 25/30 Step:: 248500 Loss: 0.744
+  [INFO] - Epoch 25/30 Step:: 249000 Loss: 0.491
+  [INFO] - Epoch 25/30 Step:: 249500 Loss: 0.892
+  [INFO] - Epoch 25/30 Step:: 250000 Loss: 1.515
+  [INFO] - Epoch 25/30 Step:: 250500 Loss: 6.645
+  [INFO] - Epoch 25/30 Step:: 251000 Loss: 1.739
+  [INFO] - Epoch 25/30 Step:: 251500 Loss: 2.767
+  [INFO] - Epoch 25/30 Step:: 252000 Loss: 1.320
+  [INFO] - Epoch 25/30 Step:: 252500 Loss: 1.710
+  [INFO] - Epoch 25/30 Step:: 253000 Loss: 2.065
+  [INFO] - Epoch 25/30 Step:: 253500 Loss: 0.503
+  [INFO] - Epoch 25/30 Step:: 254000 Loss: 1.917
+  [INFO] - Epoch 25/30 Step:: 254500 Loss: 1.586
+  [INFO] - Epoch 25/30 Step:: 255000 Loss: 1.926
+  [INFO] - Epoch 25/30 Step:: 255500 Loss: 2.711
+  [INFO] - Epoch 25/30 Step:: 256000 Loss: 4.071
+  [INFO] - Epoch 25/30 Step:: 256500 Loss: 0.824
+  [INFO] --- Epoch 25 complete. Avg. Loss: 1.489  Time taken: 8036.442
+  Validation Accuracy: 0.227
+Saved:  m-fake-nettime-2021_05_17_05_27_13--num_classes-6-17052021-030322-epoch-24-val_acc-0.227-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 26/30 Step:: 257000 Loss: 0.841
+  [INFO] - Epoch 26/30 Step:: 257500 Loss: 0.869
+  [INFO] - Epoch 26/30 Step:: 258000 Loss: 1.912
+  [INFO] - Epoch 26/30 Step:: 258500 Loss: 0.501
+  [INFO] - Epoch 26/30 Step:: 259000 Loss: 0.540
+  [INFO] - Epoch 26/30 Step:: 259500 Loss: 1.963
+  [INFO] - Epoch 26/30 Step:: 260000 Loss: 0.337
+  [INFO] - Epoch 26/30 Step:: 260500 Loss: 0.766
+  [INFO] - Epoch 26/30 Step:: 261000 Loss: 3.181
+  [INFO] - Epoch 26/30 Step:: 261500 Loss: 1.230
+  [INFO] - Epoch 26/30 Step:: 262000 Loss: 0.025
+  [INFO] - Epoch 26/30 Step:: 262500 Loss: 1.622
+  [INFO] - Epoch 26/30 Step:: 263000 Loss: 4.393
+  [INFO] - Epoch 26/30 Step:: 263500 Loss: 2.431
+  [INFO] - Epoch 26/30 Step:: 264000 Loss: 0.367
+  [INFO] - Epoch 26/30 Step:: 264500 Loss: 0.715
+  [INFO] - Epoch 26/30 Step:: 265000 Loss: 3.475
+  [INFO] - Epoch 26/30 Step:: 265500 Loss: 2.855
+  [INFO] - Epoch 26/30 Step:: 266000 Loss: 0.997
+  [INFO] - Epoch 26/30 Step:: 266500 Loss: 0.233
+  [INFO] --- Epoch 26 complete. Avg. Loss: 1.478  Time taken: 8365.040
+  Validation Accuracy: 0.233
+Saved:  m-fake-nettime-2021_05_17_05_32_41--num_classes-6-17052021-030322-epoch-25-val_acc-0.233-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 27/30 Step:: 267000 Loss: 0.177
+  [INFO] - Epoch 27/30 Step:: 267500 Loss: 4.442
+  [INFO] - Epoch 27/30 Step:: 268000 Loss: 2.674
+  [INFO] - Epoch 27/30 Step:: 268500 Loss: 2.232
+  [INFO] - Epoch 27/30 Step:: 269000 Loss: 0.461
+  [INFO] - Epoch 27/30 Step:: 269500 Loss: 2.046
+  [INFO] - Epoch 27/30 Step:: 270000 Loss: 1.569
+  [INFO] - Epoch 27/30 Step:: 270500 Loss: 2.439
+  [INFO] - Epoch 27/30 Step:: 271000 Loss: 1.620
+  [INFO] - Epoch 27/30 Step:: 271500 Loss: 0.427
+  [INFO] - Epoch 27/30 Step:: 272000 Loss: 0.845
+  [INFO] - Epoch 27/30 Step:: 272500 Loss: 1.892
+  [INFO] - Epoch 27/30 Step:: 273000 Loss: 1.120
+  [INFO] - Epoch 27/30 Step:: 273500 Loss: 3.103
+  [INFO] - Epoch 27/30 Step:: 274000 Loss: 1.583
+  [INFO] - Epoch 27/30 Step:: 274500 Loss: 1.511
+  [INFO] - Epoch 27/30 Step:: 275000 Loss: 1.776
+  [INFO] - Epoch 27/30 Step:: 275500 Loss: 0.082
+  [INFO] - Epoch 27/30 Step:: 276000 Loss: 0.832
+  [INFO] - Epoch 27/30 Step:: 276500 Loss: 2.269
+  [INFO] - Epoch 27/30 Step:: 277000 Loss: 0.836
+  [INFO] --- Epoch 27 complete. Avg. Loss: 1.468  Time taken: 8716.110
+  Validation Accuracy: 0.227
+Saved:  m-fake-nettime-2021_05_17_05_38_32--num_classes-6-17052021-030322-epoch-26-val_acc-0.227-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 28/30 Step:: 277500 Loss: 0.628
+  [INFO] - Epoch 28/30 Step:: 278000 Loss: 0.903
+  [INFO] - Epoch 28/30 Step:: 278500 Loss: 1.531
+  [INFO] - Epoch 28/30 Step:: 279000 Loss: 1.485
+  [INFO] - Epoch 28/30 Step:: 279500 Loss: 2.272
+  [INFO] - Epoch 28/30 Step:: 280000 Loss: 1.102
+  [INFO] - Epoch 28/30 Step:: 280500 Loss: 0.527
+  [INFO] - Epoch 28/30 Step:: 281000 Loss: 2.622
+  [INFO] - Epoch 28/30 Step:: 281500 Loss: 1.980
+  [INFO] - Epoch 28/30 Step:: 282000 Loss: 2.685
+  [INFO] - Epoch 28/30 Step:: 282500 Loss: 2.896
+  [INFO] - Epoch 28/30 Step:: 283000 Loss: 2.558
+  [INFO] - Epoch 28/30 Step:: 283500 Loss: 1.440
+  [INFO] - Epoch 28/30 Step:: 284000 Loss: 0.828
+  [INFO] - Epoch 28/30 Step:: 284500 Loss: 0.119
+  [INFO] - Epoch 28/30 Step:: 285000 Loss: 1.166
+  [INFO] - Epoch 28/30 Step:: 285500 Loss: 0.700
+  [INFO] - Epoch 28/30 Step:: 286000 Loss: 1.313
+  [INFO] - Epoch 28/30 Step:: 286500 Loss: 2.097
+  [INFO] - Epoch 28/30 Step:: 287000 Loss: 0.773
+  [INFO] - Epoch 28/30 Step:: 287500 Loss: 0.512
+  [INFO] --- Epoch 28 complete. Avg. Loss: 1.451  Time taken: 9020.565
+  Validation Accuracy: 0.221
+Saved:  m-fake-nettime-2021_05_17_05_43_37--num_classes-6-17052021-030322-epoch-27-val_acc-0.221-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 29/30 Step:: 288000 Loss: 0.317
+  [INFO] - Epoch 29/30 Step:: 288500 Loss: 2.420
+  [INFO] - Epoch 29/30 Step:: 289000 Loss: 2.519
+  [INFO] - Epoch 29/30 Step:: 289500 Loss: 0.646
+  [INFO] - Epoch 29/30 Step:: 290000 Loss: 0.358
+  [INFO] - Epoch 29/30 Step:: 290500 Loss: 3.043
+  [INFO] - Epoch 29/30 Step:: 291000 Loss: 0.293
+  [INFO] - Epoch 29/30 Step:: 291500 Loss: 0.974
+  [INFO] - Epoch 29/30 Step:: 292000 Loss: 0.510
+  [INFO] - Epoch 29/30 Step:: 292500 Loss: 0.832
+  [INFO] - Epoch 29/30 Step:: 293000 Loss: 2.296
+  [INFO] - Epoch 29/30 Step:: 293500 Loss: 1.239
+  [INFO] - Epoch 29/30 Step:: 294000 Loss: 1.410
+  [INFO] - Epoch 29/30 Step:: 294500 Loss: 1.710
+  [INFO] - Epoch 29/30 Step:: 295000 Loss: 2.405
+  [INFO] - Epoch 29/30 Step:: 295500 Loss: 1.977
+  [INFO] - Epoch 29/30 Step:: 296000 Loss: 0.504
+  [INFO] - Epoch 29/30 Step:: 296500 Loss: 0.406
+  [INFO] - Epoch 29/30 Step:: 297000 Loss: 1.043
+  [INFO] - Epoch 29/30 Step:: 297500 Loss: 2.074
+  [INFO] --- Epoch 29 complete. Avg. Loss: 1.442  Time taken: 9378.957
+  Validation Accuracy: 0.224
+Saved:  m-fake-nettime-2021_05_17_05_49_35--num_classes-6-17052021-030322-epoch-28-val_acc-0.224-new_feats-credit_history_feat.pth.tar
+  [INFO] - Epoch 30/30 Step:: 298000 Loss: 0.206
+  [INFO] - Epoch 30/30 Step:: 298500 Loss: 3.032
+  [INFO] - Epoch 30/30 Step:: 299000 Loss: 0.682
+  [INFO] - Epoch 30/30 Step:: 299500 Loss: 0.253
+  [INFO] - Epoch 30/30 Step:: 300000 Loss: 0.770
+  [INFO] - Epoch 30/30 Step:: 300500 Loss: 0.558
+  [INFO] - Epoch 30/30 Step:: 301000 Loss: 0.930
+  [INFO] - Epoch 30/30 Step:: 301500 Loss: 4.283
+  [INFO] - Epoch 30/30 Step:: 302000 Loss: 0.561
+  [INFO] - Epoch 30/30 Step:: 302500 Loss: 1.382
+  [INFO] - Epoch 30/30 Step:: 303000 Loss: 3.411
+  [INFO] - Epoch 30/30 Step:: 303500 Loss: 0.162
+  [INFO] - Epoch 30/30 Step:: 304000 Loss: 2.237
+  [INFO] - Epoch 30/30 Step:: 304500 Loss: 0.773
+  [INFO] - Epoch 30/30 Step:: 305000 Loss: 1.563
+  [INFO] - Epoch 30/30 Step:: 305500 Loss: 1.824
+  [INFO] - Epoch 30/30 Step:: 306000 Loss: 1.276
+  [INFO] - Epoch 30/30 Step:: 306500 Loss: 2.058
+  [INFO] - Epoch 30/30 Step:: 307000 Loss: 3.490
+  [INFO] - Epoch 30/30 Step:: 307500 Loss: 0.619
+  [INFO] - Epoch 30/30 Step:: 308000 Loss: 1.657
+  [INFO] --- Epoch 30 complete. Avg. Loss: 1.429  Time taken: 9741.693
+  Validation Accuracy: 0.233
+Saved:  m-fake-nettime-2021_05_17_05_55_38--num_classes-6-17052021-030322-epoch-29-val_acc-0.233-new_feats-credit_history_feat.pth.tar
+PATHMODEL could not be loaded: None
+Traceback (most recent call last):
+  File "main.py", line 260, in <module>
+    driver('train2.tsv', 'val2.tsv', 'test2.tsv', 'predictions.txt', dataset_name, mode, features, pathModel, hyper, feat_list=feat_list)
+  File "main.py", line 170, in driver
+    test_acc = test(test_samples, output_file, model, num_classes, use_cuda, feat_list=feat_list)
+UnboundLocalError: local variable 'test_samples' referenced before assignment

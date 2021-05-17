@@ -4,6 +4,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 from data import DataSample, dataset_to_variable, test_data_prepare
 import numpy as np
+from sklearn.metrics import classification_report
 
 num_to_label_6_way_classification = [
     'pants-fire',
@@ -24,6 +25,9 @@ def test(test_samples, test_output, model, classification_type, use_cuda = False
     out = open(test_output, 'w', buffering=1)
     acc = 0
     
+    y_true = []
+    y_pred = []
+
     for sample in test_samples:
         prediction = model(sample, augmented_feat=feat_list)
         prediction = int(np.argmax(prediction.cpu().data.numpy()))
@@ -35,9 +39,16 @@ def test(test_samples, test_output, model, classification_type, use_cuda = False
 
         if prediction == sample.label:
             acc += 1
+        
+        y_true.append(sample.label)
+        y_pred.append(prediction)
+
     acc /= len(test_samples)
     print('  Test Accuracy: {:.3f}'.format(acc))
     out.close()
+
+    target_names = num_to_label_6_way_classification 
+    print(classification_report(y_true, y_pred, target_names=target_names))
 
     return acc
 

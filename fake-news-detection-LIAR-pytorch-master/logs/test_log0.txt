@@ -1,0 +1,26 @@
+features: augmented
+feat_list: ['credit_history_feat', 'wiki_liwc_dict', 'wiki_bert_feat']
+fault: 0
+  Constructing network model...
+Hyperparams are:
+num_classes :  6
+epoch :  30
+lr :  0.001
+embed_dim :  100
+statement_kernel_num :  64
+statement_kernel_size :  [3, 4, 5]
+subject_hidden_dim :  8
+subject_lstm_nlayers :  2
+subject_lstm_bidirectional :  True
+speaker_pos_hidden_dim :  8
+speaker_pos_lstm_nlayers :  2
+speaker_pos_lstm_bidirectional :  True
+context_hidden_dim :  16
+context_lstm_nlayers :  2
+context_lstm_bidirectional :  True
+justification_hidden_dim :  32
+justification_lstm_nlayers :  2
+justification_lstm_bidirectional :  True
+dropout_query :  0.5
+dropout_features :  0.7
+slurmstepd: error: *** STEP 16673.5 ON 103server CANCELLED AT 2021-05-17T03:27:01 ***

@@ -48,7 +48,7 @@ def test(test_samples, test_output, model, classification_type, use_cuda = False
     out.close()
 
     target_names = num_to_label_6_way_classification 
-    print(classification_report(y_true, y_pred, target_names=target_names))
+    print(classification_report(y_true, y_pred, target_names=target_names),digits=5)
 
     return acc
 

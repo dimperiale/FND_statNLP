@@ -62,7 +62,7 @@ def loadModel(word2num, num_classes, hyper, feat_list=[]):
 
     return model
 
-def driver(train_file, valid_file, test_file, output_file, dataset, mode, features, pathModel, hyper, feat_list=[]):
+def driver(args,train_file, valid_file, test_file, output_file, dataset, mode, features, pathModel, hyper, feat_list=[]):
     '''
     Arguments
     ----------
@@ -78,8 +78,9 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
     timestampTime = time.strftime("%H%M%S")
     timestampDate = time.strftime("%d%m%Y")
     timestampLaunch = timestampDate + '-' + timestampTime
-    parentPath = './models/'
+    parentPath = args.modelDir # './models/'
     
+
 
     #---Hyperparams
     nnArchitecture = 'fake-net'
@@ -89,23 +90,26 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
     # use_cuda = False
     num_classes = hyper['num_classes']
 
+    train_file = os.path.join(args.dataDir, train_file)
+    valid_file = os.path.join(args.dataDir, valid_file)
+    test_file = os.path.join(args.dataDir, test_file)
 
     assert num_classes in [2, 6]
-    train_wikidict_file = "train_wikictionary_dict.txt"
-    test_wikidict_file = "test_wikictionary_dict.txt"
-    valid_wikidict_file = "valid_wikictionary_dict.txt"
+    train_wikidict_file =  os.path.join(args.featDir, "train_wikictionary_dict.txt")
+    test_wikidict_file = os.path.join(args.featDir, "test_wikictionary_dict.txt")
+    valid_wikidict_file = os.path.join(args.featDir, "valid_wikictionary_dict.txt")
 
-    train_liwc_file = "train_liwc_dict.txt"
-    test_liwc_file = "test_liwc_dict.txt"
-    valid_liwc_file = "valid_liwc_dict.txt"
+    train_liwc_file = os.path.join(args.featDir, "train_liwc_dict.txt")
+    test_liwc_file = os.path.join(args.featDir, "test_liwc_dict.txt")
+    valid_liwc_file = os.path.join(args.featDir, "valid_liwc_dict.txt")
 
     train_credit_file = "label_rel_counts"
-    test_credit_file = "test_label_rel_counts" # valid and test can share
+    test_credit_file = "test_label_rel_counts" # valid and test can shares
 
-    bert_dir = "BERT_feats"
-    train_row_to_json = "train2.tsv_row_idx_tab_json_id.txt"
-    test_row_to_json = "test2.tsv_row_idx_tab_json_id.txt"
-    valid_row_to_json = "val2.tsv_row_idx_tab_json_id.txt"
+    bert_dir = os.path.join(args.featDir,"BERT_feats")
+    train_row_to_json = os.path.join(args.featDir, "train2.tsv_row_idx_tab_json_id.txt")
+    test_row_to_json = os.path.join(args.featDir, "test2.tsv_row_idx_tab_json_id.txt")
+    valid_row_to_json = os.path.join(args.featDir, "val2.tsv_row_idx_tab_json_id.txt")
     #-----------------TRAINING--------------
     if mode == 'train':
         #---prepare data
@@ -141,7 +145,7 @@ def driver(train_file, valid_file, test_file, output_file, dataset, mode, featur
     #-----------------TESTING------------------
 
     if pathModel != None:
-        pathModel = parentPath + pathModel
+        pathModel = os.path.join(parentPath,pathModel) 
 
         modelCheckpoint = torch.load(pathModel, map_location=lambda storage, loc: storage)
         word2num = modelCheckpoint['word2num']
@@ -206,35 +210,17 @@ hyper = {
 
 dataset_name = 'LIAR-PLUS'
 
-mode = 'train'
-# features = 'augmented'
-features = "baseline"
-# feat_list = ['wiki_bert_feat','wiki_liwc_dict'] # ['wiki_liwc_dict',]
-feat_list = []
-#feat_list = ['wiki_bert_feat',]
-# feat_list = ['wiki_liwc_dict',]
-# feat_list = ['credit_history_feat',]
-# feat_list = ['credit_history_feat','wiki_liwc_dict', ]
-# feat_list = ['credit_history_feat','wiki_bert_feat',]
-# feat_list = ['credit_history_feat','wiki_liwc_dict', 'wiki_bert_feat' ]
-
-# mode = 'test'
-pathModel = None
-# v0 epoch 10:
-#pathModel = 'm-fake-net-num_classes-6-16052021-000950-epoch-8-val_acc-0.269new_feats-wiki_liwc_dict.pth.tar'
-#pathModel = 'm-fake-net-num_classes-6-12052021-165803-epoch-4-val_acc-0.252.pth.tar'
-
-# v1 epoch 30:
-# pathModel = 'm-fake-nettime-2021_05_16_03_12_54--num_classes-6-16052021-021059-epoch-7-val_acc-0.281-new_feats-wiki_bert_feat-wiki_liwc_dict.pth.tar'
-# pathModel = 'm-fake-nettime-2021_05_16_02_42_54--num_classes-6-16052021-015138-epoch-6-val_acc-0.267-new_feats-wiki_bert_feat.pth.tar'
-# pathModel = 'm-fake-nettime-2021_05_16_04_13_43--num_classes-6-16052021-015054-epoch-19-val_acc-0.271-new_feats-wiki_liwc_dict.pth.tar'
-# pathModel = 'm-fake-net-num_classes-6-16052021-014729-epoch-12-val_acc-0.261.pth.tar'
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--mode', default="train", type=str)
-parser.add_argument('--feature_type', default="baseline", type=str)
-parser.add_argument('--pathModel', default=None, type=str)
+parser.add_argument('--mode', default="train", type=str,choices=['train','test'])
+parser.add_argument('--feature_type', default="baseline", type=str,choices=['baseline','augmented'])
+parser.add_argument('--modelDir', default='./models', type=str,help='model directory')
+parser.add_argument('--pathModel', default=None, type=str,help='model name')
 parser.add_argument('--feat_list', nargs='+')
+
+parser.add_argument('--dataDir', default='./data/', type=str,help='directory for original data')
+parser.add_argument('--featDir', default='./feats/', type=str,help='directory for extended features')
+
 args = parser.parse_args()
 
 mode = args.mode
@@ -255,6 +241,6 @@ if mode == 'test':
 
 
 if dataset_name == 'LIAR':
-    driver('train.tsv', 'valid.tsv', 'test.tsv', 'predictions.txt', dataset_name, mode, features, pathModel, hyper, feat_list=feat_list)
+    driver(args,'train.tsv', 'valid.tsv', 'test.tsv', 'predictions.txt', dataset_name, mode, features, pathModel, hyper, feat_list=feat_list)
 else:
-    driver('train2.tsv', 'val2.tsv', 'test2.tsv', 'predictions.txt', dataset_name, mode, features, pathModel, hyper, feat_list=feat_list)
+    driver(args,'train2.tsv', 'val2.tsv', 'test2.tsv', 'predictions.txt', dataset_name, mode, features, pathModel, hyper, feat_list=feat_list)

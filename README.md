@@ -6,7 +6,7 @@ The [LIAR dataset](https://github.com/thiagorainmaker77/liar_dataset) consists o
 ## Architecture
 
 ## Network Architecture
-![Screenshot 1](https://github.com/dimperiale/FND_statNLP/blob/main/fake-news-detection-LIAR-pytorch-master/finals_architecture.pdf "Net")
+![Screenshot 1](https://github.com/dimperiale/FND_statNLP/blob/main/fake-news-detection-LIAR-pytorch-master/fakenet_augmented.png "Net")
 
 
 
